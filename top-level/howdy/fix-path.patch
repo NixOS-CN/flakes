@@ -1,0 +1,200 @@
+diff --git a/src/cli/add.py b/src/cli/add.py
+index 112eacd..909799d 100644
+--- a/src/cli/add.py
++++ b/src/cli/add.py
+@@ -36,7 +36,7 @@ if not os.path.isfile(path + "/../dlib-data/shape_predictor_5_face_landmarks.dat
+ 
+ # Read config from disk
+ config = configparser.ConfigParser()
+-config.read(path + "/../config.ini")
++config.read("/etc/howdy.ini")
+ 
+ use_cnn = config.getboolean("core", "use_cnn", fallback=False)
+ if use_cnn:
+@@ -49,14 +49,14 @@ face_encoder = dlib.face_recognition_model_v1(path + "/../dlib-data/dlib_face_re
+ 
+ user = builtins.howdy_user
+ # The permanent file to store the encoded model in
+-enc_file = path + "/../models/" + user + ".dat"
++enc_file = "/var/lib/howdy/models/" + user + ".dat"
+ # Known encodings
+ encodings = []
+ 
+ # Make the ./models folder if it doesn't already exist
+-if not os.path.exists(path + "/../models"):
++if not os.path.exists("/var/lib/howdy/models"):
+ 	print("No face model folder found, creating one")
+-	os.makedirs(path + "/../models")
++	os.makedirs("/var/lib/howdy/models", mode=0o700)
+ 
+ # To try read a premade encodings file if it exists
+ try:
+diff --git a/src/cli/clear.py b/src/cli/clear.py
+index 817de48..fefa887 100644
+--- a/src/cli/clear.py
++++ b/src/cli/clear.py
+@@ -11,12 +11,12 @@ path = os.path.dirname(os.path.abspath(__file__))
+ user = builtins.howdy_user
+ 
+ # Check if the models folder is there
+-if not os.path.exists(path + "/../models"):
++if not os.path.exists("/var/lib/howdy/models"):
+ 	print("No models created yet, can't clear them if they don't exist")
+ 	sys.exit(1)
+ 
+ # Check if the user has a models file to delete
+-if not os.path.isfile(path + "/../models/" + user + ".dat"):
++if not os.path.isfile("/var/lib/howdy/models/" + user + ".dat"):
+ 	print(user + " has no models or they have been cleared already")
+ 	sys.exit(1)
+ 
+@@ -32,5 +32,5 @@ if not builtins.howdy_args.y:
+ 		sys.exit(1)
+ 
+ # Delete otherwise
+-os.remove(path + "/../models/" + user + ".dat")
++os.remove("/var/lib/howdy/models/" + user + ".dat")
+ print("\nModels cleared")
+diff --git a/src/cli/config.py b/src/cli/config.py
+index 764833d..1eec76f 100644
+--- a/src/cli/config.py
++++ b/src/cli/config.py
+@@ -17,4 +17,4 @@ elif os.path.isfile("/etc/alternatives/editor"):
+ 	editor = "/etc/alternatives/editor"
+ 
+ # Open the editor as a subprocess and fork it
+-subprocess.call([editor, os.path.dirname(os.path.realpath(__file__)) + "/../config.ini"])
++subprocess.call([editor, "/etc/howdy.ini"])
+diff --git a/src/cli/disable.py b/src/cli/disable.py
+index 5f15d5b..49eb6d6 100644
+--- a/src/cli/disable.py
++++ b/src/cli/disable.py
+@@ -8,7 +8,7 @@ import fileinput
+ import configparser
+ 
+ # Get the absolute filepath
+-config_path = os.path.dirname(os.path.abspath(__file__)) + "/../config.ini"
++config_path = "/etc/howdy.ini"
+ 
+ # Read config from disk
+ config = configparser.ConfigParser()
+diff --git a/src/cli/list.py b/src/cli/list.py
+index fe05d6e..ed31623 100644
+--- a/src/cli/list.py
++++ b/src/cli/list.py
+@@ -8,7 +8,7 @@ import time
+ import builtins
+ 
+ # Get the absolute path and the username
+-path = os.path.dirname(os.path.realpath(__file__)) + "/.."
++path = "/var/lib/howdy"
+ user = builtins.howdy_user
+ 
+ # Check if the models file has been created yet
+diff --git a/src/cli/remove.py b/src/cli/remove.py
+index 45e2036..0c1d6bf 100644
+--- a/src/cli/remove.py
++++ b/src/cli/remove.py
+@@ -7,7 +7,7 @@ import json
+ import builtins
+ 
+ # Get the absolute path and the username
+-path = os.path.dirname(os.path.realpath(__file__)) + "/.."
++path = "/var/lib/howdy"
+ user = builtins.howdy_user
+ 
+ # Check if enough arguments have been passed
+diff --git a/src/cli/snap.py b/src/cli/snap.py
+index 7dce8f5..3d98e2d 100644
+--- a/src/cli/snap.py
++++ b/src/cli/snap.py
+@@ -12,7 +12,7 @@ path = os.path.abspath(__file__ + "/..")
+ 
+ # Read the config
+ config = configparser.ConfigParser()
+-config.read(path + "/../config.ini")
++config.read("/etc/howdy.ini")
+ 
+ # Start video capture
+ video_capture = VideoCapture(config)
+diff --git a/src/cli/test.py b/src/cli/test.py
+index c62fcef..1fdc307 100644
+--- a/src/cli/test.py
++++ b/src/cli/test.py
+@@ -14,7 +14,7 @@ path = os.path.dirname(os.path.abspath(__file__))
+ 
+ # Read config from disk
+ config = configparser.ConfigParser()
+-config.read(path + "/../config.ini")
++config.read("/etc/howdy.ini")
+ 
+ if config.get("video", "recording_plugin") != "opencv":
+ 	print("Howdy has been configured to use a recorder which doesn't support the test command yet")
+diff --git a/src/compare.py b/src/compare.py
+index d0ea5ea..255c192 100644
+--- a/src/compare.py
++++ b/src/compare.py
+@@ -92,7 +92,7 @@ face_encoder = None
+ 
+ # Try to load the face model from the models folder
+ try:
+-	models = json.load(open(PATH + "/models/" + user + ".dat"))
++	models = json.load(open("/var/lib/howdy/models/" + user + ".dat"))
+ 
+ 	for model in models:
+ 		encodings += model["data"]
+@@ -105,7 +105,7 @@ if len(models) < 1:
+ 
+ # Read config from disk
+ config = configparser.ConfigParser()
+-config.read(PATH + "/config.ini")
++config.read("/etc/howdy.ini")
+ 
+ # Get all config values needed
+ use_cnn = config.getboolean("core", "use_cnn", fallback=False)
+diff --git a/src/pam.py b/src/pam.py
+index 08cccef..91404f0 100644
+--- a/src/pam.py
++++ b/src/pam.py
+@@ -11,7 +11,7 @@ import ConfigParser
+ 
+ # Read config from disk
+ config = ConfigParser.ConfigParser()
+-config.read(os.path.dirname(os.path.abspath(__file__)) + "/config.ini")
++config.read("/etc/howdy.ini")
+ 
+ 
+ def doAuth(pamh):
+@@ -41,7 +41,16 @@ def doAuth(pamh):
+ 	syslog.syslog(syslog.LOG_INFO, "Attempting facial authentication for user " + pamh.get_user())
+ 
+ 	# Run compare as python3 subprocess to circumvent python version and import issues
+-	status = subprocess.call(["/usr/bin/python3", os.path.dirname(os.path.abspath(__file__)) + "/compare.py", pamh.get_user()])
++        euid = os.geteuid()
++        egid = os.getegid()
++
++        def setperm():
++            os.setuid(euid)
++            os.setgid(egid)
++
++	process = subprocess.Popen(["/usr/bin/python3", os.path.dirname(os.path.abspath(__file__)) + "/compare.py", pamh.get_user()], preexec_fn = setperm)
++        process.wait()
++        status = process.returncode
+ 
+ 	# Status 10 means we couldn't find any face models
+ 	if status == 10:
+diff --git a/src/snapshot.py b/src/snapshot.py
+index c853ffa..a295144 100644
+--- a/src/snapshot.py
++++ b/src/snapshot.py
+@@ -50,8 +50,9 @@ def generate(frames, text_lines):
+ 		line_number += 1
+ 
+ 	# Made sure a snapshot folder exist
++	abpath = "/var/lib/howdy"
+ 	if not os.path.exists(abpath + "/snapshots"):
+-		os.makedirs(abpath + "/snapshots")
++		os.makedirs(abpath + "/snapshots", mode=0o700)
+ 
+ 	# Generate a filename based on the current time
+ 	filename = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%S.jpg")

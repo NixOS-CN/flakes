@@ -1,0 +1,125 @@
+diff --git a/bin/pam-device b/bin/pam-device
+index 5fcaa17..a9a93b8 100755
+--- a/bin/pam-device
++++ b/bin/pam-device
+@@ -26,7 +26,7 @@
+ import os
+ import sys
+ 
+-USRDIR = '/usr'
++USRDIR = '@outpath@'
+ SHAREDIR = os.path.join(USRDIR, 'share', 'pam-device')
+ CURRENTDIR = os.path.abspath(os.path.dirname(__file__))
+ 
+diff --git a/data/pam-device.desktop b/data/pam-device.desktop
+index 572cf95..2a060d8 100644
+--- a/data/pam-device.desktop
++++ b/data/pam-device.desktop
+@@ -2,8 +2,8 @@
+ Name = PAM Device
+ GenericName = PAM Device
+ Comment = A pluggable Authentication Module for device authentication
+-Exec = /usr/bin/pam-device
+-Icon = /usr/share/icons/pam-device.svg
++Exec = @outpath@/bin/pam-device
++Icon = @outpath@/share/icons/pam-device.svg
+ Type = Application
+ Terminal = false
+ StartupNotify = true
+diff --git a/src/pam_device.py b/src/pam_device.py
+index 5c40ff7..ebfd772 100644
+--- a/src/pam_device.py
++++ b/src/pam_device.py
+@@ -28,7 +28,7 @@ import syslog
+ import os
+ import sys
+ 
+-sys.path.insert(1, '/lib/security')
++sys.path.insert(1, '@outpath@/lib/security')
+ syslog.openlog(facility=syslog.LOG_AUTH)
+ syslog.syslog(syslog.LOG_INFO, 'PAM device: {}'.format(
+     os.path.dirname(os.path.abspath(__file__))))
+diff --git a/src/pamdevice/bluetoothrecognizer.py b/src/pamdevice/bluetoothrecognizer.py
+index 790af90..e5d0113 100644
+--- a/src/pamdevice/bluetoothrecognizer.py
++++ b/src/pamdevice/bluetoothrecognizer.py
+@@ -34,7 +34,7 @@ class BluetoothRecognizer(Recognizer):
+     def scan(self):
+         device_re = re.compile(r"^Device\s+([^\s]+)\s+(.*)$", re.I)
+         devices = []
+-        df = execute_command('bluetoothctl devices')
++        df = execute_command('@bluetoothctl@ devices')
+         for i in df.split('\n'):
+             if i:
+                 info = device_re.match(i)
+@@ -47,7 +47,7 @@ class BluetoothRecognizer(Recognizer):
+ 
+     def is_device_connected(self, item_id):
+         connected_re = re.compile(r"Connected:\s+yes$", re.MULTILINE)
+-        df = execute_command('bluetoothctl info {}'.format(item_id))
++        df = execute_command('@bluetoothctl@ info {}'.format(item_id))
+         if connected_re.search(df):
+             return True
+         return False
+diff --git a/src/pamdevice/usbrecognizer.py b/src/pamdevice/usbrecognizer.py
+index 565b082..6940ca4 100644
+--- a/src/pamdevice/usbrecognizer.py
++++ b/src/pamdevice/usbrecognizer.py
+@@ -36,13 +36,13 @@ class USBRecognizer(Recognizer):
+         device_re = re.compile(pattern, re.I)
+         serial_re = re.compile(r".*iSerial\s+(?P<iSerial>[^\s]+)\s", re.I)
+         devices = []
+-        df = execute_command('lsusb')
++        df = execute_command('@lsusb@')
+         for i in df.split('\n'):
+             if i:
+                 info = device_re.match(i)
+                 if info:
+                     dinfo = info.groupdict()
+-                    command = 'lsusb -vd {}:{}'.format(
++                    command = '@lsusb@ -vd {}:{}'.format(
+                         dinfo['idVendor'], dinfo['idProduct'])
+                     ans = execute_command(command).replace('\n', '')
+                     data = serial_re.match(ans)
+diff --git a/src/pamdevicegui/scandevices.py b/src/pamdevicegui/scandevices.py
+index 1be1b8d..b050168 100644
+--- a/src/pamdevicegui/scandevices.py
++++ b/src/pamdevicegui/scandevices.py
+@@ -150,7 +150,7 @@ class ScanDevicesDialog(Gtk.Dialog):
+     def scan_bluetooth(self):
+         device_re = re.compile(r"^Device\s+([^\s]+)\s+(.*)$", re.I)
+         devices = []
+-        df = execute_command('bluetoothctl devices')
++        df = execute_command('@bluetoothctl@ devices')
+         for i in df.split('\n'):
+             if i:
+                 info = device_re.match(i)
+@@ -167,13 +167,13 @@ class ScanDevicesDialog(Gtk.Dialog):
+         device_re = re.compile(r".*ID\s(?P<idVendor>\w+):(?P<idProduct>\w+)\s(?P<name>.+)$", re.I)
+         serial_re = re.compile(r".*iSerial\s+(?P<iSerial>[^\s]+)\s", re.I)
+         found = []
+-        df = execute_command('lsusb')
++        df = execute_command('@lsusb@')
+         for i in df.split('\n'):
+             if i:
+                 info = device_re.match(i)
+                 if info:
+                     dinfo = info.groupdict()
+-                    command = 'lsusb -vd {}:{}'.format(
++                    command = '@lsusb@ -vd {}:{}'.format(
+                         dinfo['idVendor'], dinfo['idProduct'])
+                     ans = execute_command(command).replace('\n', '')
+                     data = serial_re.match(ans)
+diff --git a/src/pamdevicegui/utils.py b/src/pamdevicegui/utils.py
+index 4510acd..c6c4605 100644
+--- a/src/pamdevicegui/utils.py
++++ b/src/pamdevicegui/utils.py
+@@ -39,7 +39,7 @@ APPNAME = 'Pam Device'
+ 
+ # check if running from source
+ if is_package():
+-    ROOTDIR = '/usr/share'
++    ROOTDIR = '@outpath@/share'
+     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
+     APPDIR = os.path.join(ROOTDIR, APP)
+     CHANGELOG = os.path.join(APPDIR, 'changelog')

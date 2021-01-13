@@ -1,0 +1,12 @@
+diff --git a/client/scripts/ui.js b/client/scripts/ui.js
+index 942c3b8..8c2292d 100644
+--- a/client/scripts/ui.js
++++ b/client/scripts/ui.js
+@@ -613,7 +613,6 @@ Events.on('load', () => {
+     };
+     init();
+     animate();
+-    setTimeout(e => window.animateBackground(false), 3000);
+ });
+ 
+ Notifications.PERMISSION_ERROR = `
