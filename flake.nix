@@ -49,6 +49,8 @@
         checks = flattenTree legacyPackages;
       }) // {
         overlay = final: prev: makePackageSet (n: final.callPackage n { });
-        nixosModules.nixos-cn-registries = toNixOSCNRegistries (import ./registries.nix);
+        nixosModules.nixos-cn-registries = { ... }: {
+          nix.registry = toNixOSCNRegistries (import ./registries.nix);
+        };
       };
 }
