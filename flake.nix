@@ -11,6 +11,18 @@
     let
       defaultSystem = "x86_64-linux";
       listFiles = dir: map (n: dir + "/${n}") (attrNames (readDir dir));
+      listNixFilesRecursive = dir:
+        flatten (mapAttrsToList (name: type:
+          let path = dir + "/${name}";
+          in if type == "directory" then
+            if pathExists (dir + "/${name}/default.nix") then
+              path
+            else
+              listNixFilesRecursive path
+          else if hasSuffix ".nix" name then
+            path
+          else
+            [ ]) (readDir dir));
       filterBySystem = system: pkgs:
         filterAttrs (_: p:
           if hasAttrByPath [ "meta" "platforms" ] p then
@@ -48,8 +60,14 @@
         legacyPackages = makePackageSet' system (n: pkgs.callPackage n { });
         checks = flattenTree legacyPackages;
       }) // {
-        overlay = final: prev: makePackageSet (n: final.callPackage n { });
-        nixosModules.nixos-cn-registries = { ... }: {
+        overlay = final: prev: {
+          nixoscn = makePackageSet (n: final.callPackage n { });
+        };
+        nixosModules.nixoscn = { ... }: {
+          nixpkgs.overlays = [ self.overlay ];
+          imports = listNixFilesRecursive ./module;
+        };
+        nixosModules.nixoscn-registries = { ... }: {
           nix.registry = toNixOSCNRegistries (import ./registries.nix);
         };
       };
