@@ -9,4 +9,9 @@
     owner = "icebox-nix";
     repo = "netkit.nix";
   };
+  berberman = {
+    type = "github";
+    owner = "berberman";
+    repo = "flakes";
+  };
 }
