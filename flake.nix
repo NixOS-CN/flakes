@@ -41,7 +41,6 @@
           name = baseNameOf dir;
           value = recurseIntoAttrs (getPackages f dir);
         }) (listFiles ./package-set));
-      makePackageSet' = system: f: filterBySystem system (makePackageSet f);
 
       toNixOSCNRegistries = mapAttrs (name: entry: {
         from = {
@@ -78,11 +77,11 @@
           config.allowUnfree = true;
         });
       in rec {
-        legacyPackages = makePackageSet' system (n: pkgs.callPackage n { }) // {
+        legacyPackages = filterBySystem system (makePackageSet (n: pkgs.callPackage n { }) // {
           re-export = mapRecurseIntoAttrs (extractFromRegistries (_: output:
             (attrByPath [ "packages" system ] { } output)
             // (attrByPath [ "legacyPackages" system ] { } output)));
-        };
+        });
         checks = flattenTree legacyPackages;
         apps = {
           update-lock = mkApp {
