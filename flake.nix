@@ -69,6 +69,15 @@
         mapAttrs (_: v:
           if !isAttrs v || isDerivation v then v else mapRecurseIntoAttrs v)
         (recurseIntoAttrs s);
+      mergeAttrsUniquely = s:
+        let
+          nameCount = zipAttrsWith (name: values: length values) (attrValues s);
+        in foldl (prev: name:
+          prev // (mapAttrs' (n: v:
+            if nameCount.${n} > 1 then
+              nameValuePair "${n}-${name}" v
+            else
+              nameValuePair n v) s.${name})) {} (attrNames s);
 
     in eachDefaultSystem (system:
       let
@@ -77,11 +86,13 @@
           config.allowUnfree = true;
         });
       in rec {
-        legacyPackages = filterBySystem system (makePackageSet (n: pkgs.callPackage n { }) // {
-          re-export = mapRecurseIntoAttrs (extractFromRegistries (_: output:
-            (attrByPath [ "packages" system ] { } output)
-            // (attrByPath [ "legacyPackages" system ] { } output)));
-        });
+        legacyPackages = filterBySystem system
+          (makePackageSet (n: pkgs.callPackage n { }) // {
+            re-export = mapRecurseIntoAttrs (mergeAttrsUniquely
+              (extractFromRegistries (_: output:
+                (attrByPath [ "packages" system ] { } output)
+                // (attrByPath [ "legacyPackages" system ] { } output))));
+          });
         checks = flattenTree legacyPackages;
         apps = {
           update-lock = mkApp {
@@ -103,7 +114,8 @@
         };
       }) // {
         overlay = final: prev: {
-          nixoscn = recurseIntoAttrs (makePackageSet (n: final.callPackage n { }));
+          nixoscn =
+            recurseIntoAttrs (makePackageSet (n: final.callPackage n { }));
         };
         nixosModules.nixoscn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];

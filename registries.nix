@@ -1,5 +1,5 @@
 {
-  NickCao = {
+  nickcao = {
     type = "gitlab";
     owner = "NickCao";
     repo = "flakes";
