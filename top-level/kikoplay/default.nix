@@ -17,4 +17,6 @@
       --replace '-llua5.3' '-llua' \
       --replace '/usr' '${placeholder "out"}'
   '';
+
+  meta.description = "KikoPlay - NOT ONLY A Full-Featured Danmu Player";
 }

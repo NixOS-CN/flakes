@@ -53,6 +53,7 @@ in runCommand "wechat" {
   inherit bubblewrap script mountPoints fakeHome;
   inherit (stdenv) shell;
   buildInputs = [ makeWrapper ];
+  meta.license = stdenv.lib.licenses.unfree;
 } ''
   mkdir -p $out/bin
   cp -r ${source}/usr/share $out

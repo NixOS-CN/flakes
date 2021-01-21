@@ -60,6 +60,6 @@ stdenv.mkDerivation rec {
     homepage = "https://music.163.com";
     platforms = [ "x86_64-linux" ];
     maintainers = [ stdenv.lib.maintainers.mlatus ];
-    license = stdenv.lib.licenses.unfreeRedistributable;
+    license = stdenv.lib.licenses.unfree;
   };
 }

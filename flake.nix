@@ -77,7 +77,7 @@
             if nameCount.${n} > 1 then
               nameValuePair "${n}-${name}" v
             else
-              nameValuePair n v) s.${name})) {} (attrNames s);
+              nameValuePair n v) s.${name})) { } (attrNames s);
 
     in eachDefaultSystem (system:
       let
@@ -85,15 +85,14 @@
           inherit system;
           config.allowUnfree = true;
         });
+        intree-packages =
+          filterBySystem system (makePackageSet (n: pkgs.callPackage n { }));
+        outtree-packages = filterBySystem system (mapRecurseIntoAttrs
+          (mergeAttrsUniquely (extractFromRegistries (_: output:
+            (attrByPath [ "packages" system ] { } output)
+            // (attrByPath [ "legacyPackages" system ] { } output)))));
       in rec {
-        legacyPackages = filterBySystem system
-          (makePackageSet (n: pkgs.callPackage n { }) // {
-            re-export = mapRecurseIntoAttrs (mergeAttrsUniquely
-              (extractFromRegistries (_: output:
-                (attrByPath [ "packages" system ] { } output)
-                // (attrByPath [ "legacyPackages" system ] { } output))));
-          });
-        checks = flattenTree legacyPackages;
+        legacyPackages = intree-packages // { re-export = outtree-packages; };
         apps = {
           update-lock = mkApp {
             drv = with pkgs;
@@ -112,6 +111,11 @@
               '';
           };
         };
+
+        checks = flattenTree intree-packages;
+        hydraJobs = filterAttrs
+          (_: v: !(hasAttrByPath [ "meta" "license" ] v) || v.meta.license.free)
+          checks;
       }) // {
         overlay = final: prev: {
           nixoscn =

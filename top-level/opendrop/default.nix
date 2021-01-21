@@ -17,4 +17,6 @@ buildPythonApplication rec {
   '';
 
   doCheck = false;
+
+  meta.description = "An open Apple AirDrop implementation written in Python";
 }
