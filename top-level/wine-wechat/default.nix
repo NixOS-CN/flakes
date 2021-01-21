@@ -1,5 +1,5 @@
 { stdenv, lib, wine, winetricks, fetchpatch, fetchurl, gnutar, zstd, python3
-, makeWrapper, srcOnly, substituteAll, runCommand, bubblewrap
+, makeWrapper, srcOnly, substituteAll, runCommand, bubblewrap, coreutils, nix
 , extraROMountPoints ? { }, extraMountPoints ? { }
 , fakeHome ? "$HOME/.local/fakefs/wechat" }:
 let
@@ -50,14 +50,18 @@ let
     })";
 
 in runCommand "wechat" {
-  inherit bubblewrap script mountPoints fakeHome;
+  inherit bubblewrap coreutils nix script mountPoints fakeHome;
   inherit (stdenv) shell;
   buildInputs = [ makeWrapper ];
+  exportReferencesGraph = [ "scriptRefs" script "zstdRefs" zstd ];
   meta.license = stdenv.lib.licenses.unfree;
 } ''
   mkdir -p $out/bin
-  cp -r ${source}/usr/share $out
+  cp -r --no-preserve=all ${source}/usr/share $out
   substituteAll ${./bwrap.sh} $out/bin/wechat
   chmod +x $out/bin/wechat
-  wrapProgram $out/bin/wechat --prefix PATH : ${zstd}/bin
+  wrapProgram $out/bin/wechat --prefix PATH : ${lib.makeBinPath [ zstd ]}
+
+  mkdir -p $out/share/wechat
+  cat scriptRefs zstdRefs|grep '^/'|sort|uniq > $out/share/wechat/nix-closure
 ''
