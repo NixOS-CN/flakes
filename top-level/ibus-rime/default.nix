@@ -30,5 +30,9 @@ stdenv.mkDerivation rec {
        --replace '/usr' $out
   '';
 
-  meta.isIbusEngine = true;
+  meta = {
+    description = "Rime for Linux/IBus";
+    isIbusEngine = true;
+  };
+
 }

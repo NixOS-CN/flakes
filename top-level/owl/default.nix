@@ -10,4 +10,6 @@
   };
 
   buildInputs = [ cmake libpcap libev libnl ];
+
+  meta.description = "An open Apple Wireless Direct Link (AWDL) implementation written in C";
 }

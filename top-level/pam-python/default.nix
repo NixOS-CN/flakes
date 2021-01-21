@@ -14,4 +14,6 @@ in stdenv.mkDerivation rec {
     substituteInPlace src/Makefile --replace '-Werror' '-O -Werror=cpp'
   '';
   makeFlags = [ "PREFIX=${outPath}" "LIBDIR=${outPath}/lib/security" ];
+
+  meta.description = "Enables PAM modules to be written in Python";
 }

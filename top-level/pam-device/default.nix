@@ -40,4 +40,6 @@ in stdenv.mkDerivation rec {
                   '${pythonInUse}/bin/python3'
     done
   '';
+
+  meta.description = "PAM DEVICE is a Pluggable Authentication Module for device authentication";
 }

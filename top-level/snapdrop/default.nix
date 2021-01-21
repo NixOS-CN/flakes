@@ -13,7 +13,10 @@ let
       ++ optional infiniteAnimation ./infinite-animation.patch;
   };
   server = (import ./server.nix { inherit pkgs source; }).package;
-in runCommand "snapdrop" { nativeBuildInputs = [ makeWrapper ]; } ''
+in runCommand "snapdrop" {
+  nativeBuildInputs = [ makeWrapper ];
+  meta.description = "A Progressive Web App for local file sharing";
+} ''
   mkdir -p $out/bin
   makeWrapper ${nodejs}/bin/node $out/bin/snapdrop --add-flags ${server}/lib/node_modules/snapdrop/index.js
   mkdir -p $out/lib/share/snapdrop

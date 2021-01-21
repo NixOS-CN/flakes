@@ -59,4 +59,6 @@ in stdenv.mkDerivation rec {
     	mkdir -p "${outPath}/share/bash-completion/completions"
     	cp autocomplete/howdy "${outPath}/share/bash-completion/completions/howdy"
       '';
+
+  meta.description = "Windows Hello style facial authentication for Linux";
 }
