@@ -1,23 +1,22 @@
 #!@shell@
 binding=@mountPoints@
-for dir in /run/*;do
-    if [[ $dir == "/run/current-system" ]];then
-        continue
-    fi
+binding+=(--ro-bind /run/user /run/user)
 
-    if [[ $dir == "/run/booted-system" ]];then
-        continue
-    fi
-
-    binding+=(--ro-bind $dir $dir)
+for path in $(@coreutils@/bin/cat @out@/share/wechat/nix-closure);do
+    binding+=(--ro-bind $path $path)
 done
 
-for dir in /run/current-system/*;do
-    if [[ $dir == "/run/current-system/nix-config" ]];then
-        continue
-    fi
+bindsrcs=()
+bindsrcs+=(/run/current-system/sw/lib/locale)
+bindsrcs+=(/run/opengl-driver)
+bindsrcs+=(/run/opengl-driver-32)
+bindsrcs+=(/etc/fonts)
 
-    binding+=(--ro-bind $dir $dir)
+for binds in ${bindsrcs[@]};do
+    binding+=(--ro-bind $binds $binds)
+    for path in $(@nix@/bin/nix path-info -r $(realpath $binds));do
+        binding+=(--ro-bind $path $path)
+    done
 done
 
 homedir=@fakeHome@
@@ -28,8 +27,7 @@ fi
 
 @bubblewrap@/bin/bwrap \
     --dev /dev \
-    --ro-bind /nix /nix \
-    --ro-bind /etc /etc "${binding[@]}" \
+    "${binding[@]}" \
     --bind $homedir $HOME \
     --dev-bind /dev /dev \
     --dir /tmp \

@@ -19,4 +19,6 @@ in stdenv.mkDerivation rec {
     substituteInPlace Makefile.in --replace '$(DESTDIR)$(SYSCONFDIR)' "${outDir}/etc"
     substituteInPlace intel-undervolt-loop.service.in --replace '/bin/kill' "${coreutils}/bin/kill"
   '';
+
+  meta.description = "Intel CPU undervolting and throttling configuration tool";
 }

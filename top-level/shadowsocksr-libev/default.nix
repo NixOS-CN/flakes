@@ -1,7 +1,7 @@
 { gcc7Stdenv, fetchgit, libsodium, libev, pcre, asciidoc, xmlto, docbook_xml_dtd_45
 , docbook_xsl, zlib, openssl, udns, autoconf, automake, libtool, patchelf }:
 gcc7Stdenv.mkDerivation {
-  name = "shadowsocks";
+  name = "shadowsocksr-libev";
   src = fetchgit {
     url = "https://github.com/shadowsocksrr/shadowsocksr-libev.git";
     rev = "4799b312b8244ec067b8ae9ba4b85c877858976c";
@@ -32,4 +32,6 @@ gcc7Stdenv.mkDerivation {
   '';
 
   dontStrip = true;
+
+  meta.description = "Shadowsocksr-libev is a lightweight secured SOCKS5 proxy for embedded devices and low-end boxes";
 }
