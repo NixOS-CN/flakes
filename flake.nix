@@ -87,7 +87,7 @@
         });
         intree-packages =
           filterBySystem system (makePackageSet (n: pkgs.callPackage n { }));
-        outtree-packages = filterBySystem system (mapRecurseIntoAttrs
+        outtree-packages = /*filterBySystem system*/ (mapRecurseIntoAttrs
           (mergeAttrsUniquely (extractFromRegistries (_: output:
             (attrByPath [ "packages" system ] { } output)
             // (attrByPath [ "legacyPackages" system ] { } output)))));
