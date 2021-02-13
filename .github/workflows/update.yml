@@ -1,7 +1,7 @@
 name: "Update flake registries"
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 0 * * *'
 jobs:
   update:
     runs-on: ubuntu-latest
