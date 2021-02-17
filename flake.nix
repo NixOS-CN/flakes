@@ -117,7 +117,7 @@
                 (map (p: builtins.unsafeDiscardStringContext p.drvPath)
                   (builtins.attrValues (flattenTree outtree-packages))));
               hash = runCommand "hash" { buildInputs = [ coreutils ]; } ''
-                sha256sum ${drvPaths}|cut -d' ' -f1 > $out
+                cat ${drvPaths}|sort|sha256sum|cut -d' ' -f1 > $out
               '';
             in mkApp {
               drv = writeShellScriptBin "re-export-hash" ''
