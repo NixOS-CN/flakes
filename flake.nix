@@ -118,14 +118,14 @@
           checks;
       }) // {
         overlay = final: prev: {
-          nixoscn =
+          nixos-cn =
             recurseIntoAttrs (makePackageSet (n: final.callPackage n { }));
         };
-        nixosModules.nixoscn = { ... }: {
+        nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
           imports = listNixFilesRecursive ./module;
         };
-        nixosModules.nixoscn-registries = { ... }: {
+        nixosModules.nixos-cn-registries = { ... }: {
           nix.registry = toNixOSCNRegistries (import ./registries.nix);
         };
       };
