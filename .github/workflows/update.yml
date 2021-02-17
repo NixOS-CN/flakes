@@ -17,16 +17,26 @@ jobs:
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install
     - name: Configure Nix to enable flake
       run: echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
-    - name: Update dependencies
-      run: nix flake update --recreate-lock-file
-    - name: Update registries
-      run: |
-        nix run .#update-lock > registries.lock.new
-        rm registries.lock
-        mv registries.lock.new registries.lock
-    - name: Commit changes
+    - name: Configure git
       run: |
         git config --global user.name 'Automation - Ninlives'
         git config --global user.email 'wqseleven@gmail.com'
-        git diff-index --quiet HEAD || git commit -am "Update registries - Automated Commit"
+    - name: Update dependencies
+      run: nix flake update --recreate-lock-file
+    - name: Commit changes
+      run: |
+        git diff-index --quiet HEAD || git commit -am "Update dependencies - Automated Commit"
         git push
+    - name: Update registries
+      run: |
+        export OLD_HASH=$(nix run .#re-export-hash)
+        nix run .#update-lock > registries.lock.new
+        rm registries.lock
+        mv registries.lock.new registries.lock
+        export NEW_HASH=$(nix run .#re-export-hash)
+    - name: Commit changes
+      run: |
+        git diff-index --quiet HEAD || if [[ "${NEW_HASH}" != "${OLD_HASH}" ]];then
+            git commit -am "Update registries - Automated Commit"
+            git push
+        fi
