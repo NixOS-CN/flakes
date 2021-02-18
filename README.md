@@ -1,8 +1,8 @@
 # 简介
 
-这里是由NixOS中文社区维护的一个[Nix Flakes](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html), 包括社区成员贡献的一些包以及NixOS模块.
+这里是由 NixOS 中文社区维护的一个 [Nix Flakes](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html) , 包括社区成员贡献的一些包以及 NixOS 模块.
 
-目前社区成员主要在[Telegram频道](https://github.com/nixos-cn/NixOS-CN-telegram)进行交流.
+目前社区成员主要在 [Telegram 群组](https://github.com/nixos-cn/NixOS-CN-telegram) 进行交流.
 
 # 使用
 
@@ -48,7 +48,7 @@
 
 ## 贡献新的包
 
-例如你希望向nixos-cn flake提供`opendrop`这个包:
+例如你希望向 nixos-cn flake 提供 `opendrop` 这个包:
 
 ```sh
 $ git clone https://github.com/nixos-cn/flakes
@@ -58,10 +58,10 @@ $ cd opendrop
 $ $EDITOR default.nix
 ```
 
-`top-level`下的各个文件夹会自动被`callPackage`写入`legacyPackages.${system}.${directory-name}`, 即`github:nixos-cn/flakes#legacyPackages.opendrop = callPackage ./top-level/opendrop`.
+`top-level` 下的各个文件夹会自动被 `callPackage` 写入 `legacyPackages.${system}.${directory-name}`, 即 `github:nixos-cn/flakes#legacyPackages.opendrop = callPackage ./top-level/opendrop`.
 
-如果你认为你希望贡献的包不应该放进top-level (例如一个Gnome扩展), 可以将其放到`package-set`下.
-以Gnome扩展`compiz-windows-effect`为例:
+如果你认为你希望贡献的包不应该放进 top-level (例如一个 GNOME 扩展), 可以将其放到 `package-set` 下.
+以 GNOME 扩展 `compiz-windows-effect` 为例:
 
 ```sh
 $ cd flakes/package-set
@@ -70,11 +70,11 @@ $ cd gnome-extension/compiz-windows-effect
 $ $EDITOR default.nix
 ```
 
-此时有`github:nixos-cn/flakes#legacyPackages.gnome-extension.compiz-windows-effect = callPackage ./package-set/gnome-extension/compiz-windows-effect`.
+此时有 `github:nixos-cn/flakes#legacyPackages.gnome-extension.compiz-windows-effect = callPackage ./package-set/gnome-extension/compiz-windows-effect`.
 
-## 贡献新的NixOS模块
+## 贡献新的 NixOS 模块
 
-直接往`module`文件夹中添加任意`.nix`文件. `module`文件夹下的所有`.nix`文件或者包含`default.nix`的文件夹都会被递归地import到`nixosModules.nixos-cn`中.
+直接往 `module` 文件夹中添加任意 `.nix` 文件. `module` 文件夹下的所有 `.nix` 文件或者包含 `default.nix` 的文件夹都会被递归地 import 到 `nixosModules.nixos-cn` 中.
 
 假设目前`module`文件夹的结构如下:
 
@@ -91,7 +91,7 @@ module
     └── module—2.nix
 ```
 
-则`nixosModules.nixos-cn`中将包含:
+则 `nixosModules.nixos-cn` 中将包含:
 ```nix
 { ... }: {
   imports = [
@@ -103,9 +103,9 @@ module
 }
 ```
 
-## 贡献新的Registry
+## 贡献新的 Registry entries
 
-如果你不希望将你的包直接加入到nixos-cn, 也可以选择提供你的flakes url作为registry, 可参考`registries.nix`中已有的registry.
+如果你不希望将你的包直接加入到 nixos-cn, 也可以选择提供你的 flakes url 作为 registry entry, 可参考 `registries.nix` 中已有的 registry entries.
 
-`registries.nix`中的entry会被添加到`nixosModules.nixos-cn-registries`所提供的registry列表中, 并且每个flake提供的`packages`和`legacyPackages`都会被放入`legacyPackages.re-export`.
-即`github:nixos-cn/flakes#legacyPackages.re-export = fold (r: s: s // r.packages // r.legacyPackages) {} (getFlakes ./registries.nix)`.
+`registries.nix` 中的 entry 会被添加到 `nixosModules.nixos-cn-registries` 所提供的 registry 列表中, 并且每个 flake 提供的 `packages` 和 `legacyPackages` 都会被放入 `legacyPackages.re-export`.
+即 `github:nixos-cn/flakes#legacyPackages.re-export = fold (r: s: s // r.packages // r.legacyPackages) {} (getFlakes ./registries.nix)`.
