@@ -1,6 +1,8 @@
 #!@shell@
 binding=@mountPoints@
 binding+=(--ro-bind /run/user /run/user)
+binding+=(--ro-bind /etc/passwd /etc/passwd)
+binding+=(--ro-bind /etc/group /etc/group)
 
 for path in $(@coreutils@/bin/cat @out@/share/wechat/nix-closure);do
     binding+=(--ro-bind $path $path)
@@ -11,7 +13,7 @@ bindsrcs+=(/run/current-system/sw/lib/locale)
 bindsrcs+=(/run/opengl-driver)
 bindsrcs+=(/run/opengl-driver-32)
 bindsrcs+=(/etc/fonts)
-bindsrcs+=(/bin)
+bindsrcs+=(/bin/sh)
 
 for binds in ${bindsrcs[@]};do
     binding+=(--ro-bind $binds $binds)
