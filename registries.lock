@@ -1,11 +1,11 @@
 {
   "berberman": {
-    "rev": "0bc535af24acee987316fab0b7323cbcccb6b8ed"
+    "rev": "d3d5b18e02fd3bd32ce75019b85f3d25dc35079f"
   },
   "netkit": {
-    "rev": "7316aca117c2da62eb44f5c323b742a3519e7acc"
+    "rev": "eba6cabcdd9a6e5173fcdb2f4ddbeb8819166374"
   },
   "nickcao": {
-    "rev": "cbd8e437877cd5ab98720d5986f228ebc42cec1d"
+    "rev": "234bed589a6d26777b0980d279c9d8b19a32cd9a"
   }
 }

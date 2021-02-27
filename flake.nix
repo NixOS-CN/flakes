@@ -87,10 +87,11 @@
         });
         intree-packages =
           filterBySystem system (makePackageSet (n: pkgs.callPackage n { }));
-        outtree-packages = /*filterBySystem system*/ (mapRecurseIntoAttrs
-          (mergeAttrsUniquely (extractFromRegistries (_: output:
-            (attrByPath [ "packages" system ] { } output)
-            // (attrByPath [ "legacyPackages" system ] { } output)))));
+        outtree-packages = # filterBySystem system
+          (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
+            (_: output:
+              (attrByPath [ "packages" system ] { } output)
+              // (attrByPath [ "legacyPackages" system ] { } output)))));
       in rec {
         legacyPackages = intree-packages // { re-export = outtree-packages; };
         apps = {
@@ -110,6 +111,19 @@
                 echo "$lock"|jq
               '';
           };
+          re-export-hash = with pkgs;
+            let
+              drvPaths = writeText "drvPaths" (concatStringsSep "\n"
+                (map (p: builtins.unsafeDiscardStringContext p.drvPath)
+                  (builtins.attrValues (flattenTree outtree-packages))));
+              hash = runCommand "hash" { buildInputs = [ coreutils ]; } ''
+                cat ${drvPaths}|sort|sha256sum|cut -d' ' -f1 > $out
+              '';
+            in mkApp {
+              drv = writeShellScriptBin "re-export-hash" ''
+                cat ${hash}
+              '';
+            };
         };
 
         checks = flattenTree intree-packages;
