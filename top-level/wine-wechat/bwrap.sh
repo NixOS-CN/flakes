@@ -11,6 +11,7 @@ bindsrcs+=(/run/current-system/sw/lib/locale)
 bindsrcs+=(/run/opengl-driver)
 bindsrcs+=(/run/opengl-driver-32)
 bindsrcs+=(/etc/fonts)
+bindsrcs+=(/bin)
 
 for binds in ${bindsrcs[@]};do
     binding+=(--ro-bind $binds $binds)
