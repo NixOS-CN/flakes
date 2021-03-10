@@ -48,7 +48,7 @@
         in foldl (set: target:
           recursiveUpdate set (setAttrByPath (getAttrPath target) (f target)))
         { } (listNixFilesRecursive dir);
-      makePackageSet = f: getPackages f ./package;
+      makePackageSet = f: getPackages f ./packages;
 
       toNixOSCNRegistries = mapAttrs (name: entry: {
         from = {
@@ -145,7 +145,7 @@
         };
         nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
-          imports = listNixFilesRecursive ./module;
+          imports = listNixFilesRecursive ./modules;
         };
         nixosModules.nixos-cn-registries = { ... }: {
           nix.registry = toNixOSCNRegistries (import ./registries.nix);
