@@ -1,4 +1,4 @@
-{ stdenv, qtbase, cmake, fetchFromGitHub }: stdenv.mkDerivation {
+{ stdenv, qtbase, cmake, fetchFromGitHub, wrapQtAppsHook }: stdenv.mkDerivation {
   pname = "qhttpengine";
   version = "2018-03-22";
 
@@ -9,6 +9,6 @@
     sha256 = "10r3ybcgm6602iadnxr502bfdld03srh4sgclyhq6l5j886pmvjw";
   };
 
-  nativeBuildInputs = [ cmake ];
+  nativeBuildInputs = [ cmake wrapQtAppsHook ];
   buildInputs = [ qtbase ];
 }
