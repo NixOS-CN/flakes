@@ -31,16 +31,24 @@
             elem system p.meta.platforms
           else
             system == defaultSystem)) pkgs;
+
       getPackages = f: dir:
-        listToAttrs (map (name: {
-          inherit name;
-          value = f (dir + "/${name}");
-        }) (attrNames (readDir dir)));
-      makePackageSet = f:
-        getPackages f ./top-level // listToAttrs (map (dir: {
-          name = baseNameOf dir;
-          value = recurseIntoAttrs (getPackages f dir);
-        }) (listFiles ./package-set));
+        let
+          getAttrPathPrefix = target:
+            filter (p: p != "") (splitString "/"
+              (removePrefix (toString dir) (toString (dirOf target))));
+          getName = target:
+            let baseName = baseNameOf target;
+            in if hasSuffix ".nix" baseName then
+              removeSuffix ".nix" baseName
+            else
+              baseName;
+          getAttrPath = target:
+            ((getAttrPathPrefix target) ++ [ (getName target) ]);
+        in foldl (set: target:
+          recursiveUpdate set (setAttrByPath (getAttrPath target) (f target)))
+        { } (listNixFilesRecursive dir);
+      makePackageSet = f: getPackages f ./package;
 
       toNixOSCNRegistries = mapAttrs (name: entry: {
         from = {
@@ -85,8 +93,8 @@
           inherit system;
           config.allowUnfree = true;
         });
-        intree-packages =
-          filterBySystem system (makePackageSet (n: pkgs.callPackage n { }));
+        intree-packages = filterBySystem system
+          (mapRecurseIntoAttrs (makePackageSet (n: pkgs.callPackage n { })));
         outtree-packages = # filterBySystem system
           (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
             (_: output:

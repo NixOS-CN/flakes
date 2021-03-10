@@ -52,25 +52,13 @@
 
 ```sh
 $ git clone https://github.com/nixos-cn/flakes
-$ cd flakes/top-level
+$ cd flakes/packages
 $ mkdir opendrop
 $ cd opendrop
 $ $EDITOR default.nix
 ```
 
-`top-level` 下的各个文件夹会自动被 `callPackage` 写入 `legacyPackages.${system}.${directory-name}`, 即 `github:nixos-cn/flakes#legacyPackages.opendrop = callPackage ./top-level/opendrop`.
-
-如果你认为你希望贡献的包不应该放进 top-level (例如一个 GNOME 扩展), 可以将其放到 `package-set` 下.
-以 GNOME 扩展 `compiz-windows-effect` 为例:
-
-```sh
-$ cd flakes/package-set
-$ mkdir -p gnome-extension/compiz-windows-effect
-$ cd gnome-extension/compiz-windows-effect
-$ $EDITOR default.nix
-```
-
-此时有 `github:nixos-cn/flakes#legacyPackages.gnome-extension.compiz-windows-effect = callPackage ./package-set/gnome-extension/compiz-windows-effect`.
+`packages` 下的所有 `.nix` 文件或者包含 `default.nix` 的文件夹都会被递归地 `callPackage` 写入 `legacyPackages.${system}.${directory-name}`, 即 `github:nixos-cn/flakes#legacyPackages.opendrop = callPackage ./packages/opendrop`, 并且 `github:nixos-cn/flakes#legacyPackages.gnome-extension.compiz-windows-effect = callPackage ./packages/gnome-extension/compiz-windows-effect`.
 
 ## 贡献新的 NixOS 模块
 
