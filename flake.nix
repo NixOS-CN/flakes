@@ -94,7 +94,7 @@
           config.allowUnfree = true;
         });
         intree-packages = filterBySystem system
-          (mapRecurseIntoAttrs (makePackageSet (n: pkgs.callPackage n { })));
+          (mapRecurseIntoAttrs (makeScope pkgs.newScope  (self: (makePackageSet (n: self.callPackage n { })) ) ));
         outtree-packages = # filterBySystem system
           (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
             (_: output:
