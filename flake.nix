@@ -49,6 +49,7 @@
           recursiveUpdate set (setAttrByPath (getAttrPath target) (f target)))
         { } (listNixFilesRecursive dir);
       makePackageSet = f: getPackages f ./packages;
+      makePackageScope = pkgs: makeScope pkgs.newScope  (self: (makePackageSet (n: self.callPackage n { })) ) ;
 
       toNixOSCNRegistries = mapAttrs (name: entry: {
         from = {
@@ -94,7 +95,7 @@
           config.allowUnfree = true;
         });
         intree-packages = filterBySystem system
-          (mapRecurseIntoAttrs (makeScope pkgs.newScope  (self: (makePackageSet (n: self.callPackage n { })) ) ));
+          (mapRecurseIntoAttrs (makePackageScope pkgs));
         outtree-packages = # filterBySystem system
           (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
             (_: output:
@@ -141,7 +142,7 @@
       }) // {
         overlay = final: prev: {
           nixos-cn =
-            recurseIntoAttrs (makePackageSet (n: final.callPackage n { }));
+            recurseIntoAttrs (makePackageScope final);
         };
         nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
