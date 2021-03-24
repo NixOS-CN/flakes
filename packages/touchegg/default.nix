@@ -10,6 +10,9 @@
 , cmake
 , pkgconfig
 , fetchFromGitHub }:
+let
+  out = placeholder "out";
+in
 stdenv.mkDerivation {
   pname = "touchegg";
   version = "2021-03-12";
@@ -39,7 +42,12 @@ stdenv.mkDerivation {
     glib
     cmake
   ];
-  cmakeFlags = [ "-DSYSTEMD_SERVICE_DIR=${placeholder "out"}/lib/systemd/system" ];
+  cmakeFlags = [ "-DSYSTEMD_SERVICE_DIR=${out}/lib/systemd/system" ];
+
+  postInstall = ''
+    substituteInPlace ${out}/etc/xdg/autostart/touchegg.desktop \
+      --replace "Exec=touchegg" "Exec=${out}/bin/touchegg"
+  '';
 
   meta = {
     homepage = "https://github.com/JoseExposito/touchegg";
