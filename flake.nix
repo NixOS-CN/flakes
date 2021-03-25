@@ -142,7 +142,7 @@
       }) // {
         overlay = final: prev: {
           nixos-cn =
-            recurseIntoAttrs (makePackageScope final);
+            mapRecurseIntoAttrs (makePackageScope final);
         };
         nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
