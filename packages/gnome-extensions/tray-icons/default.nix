@@ -4,8 +4,8 @@ in stdenv.mkDerivation {
   name = "dynamic-panel-transparent";
   src = fetchgit {
     url = "https://github.com/zhangkaizhao/gnome-shell-extension-tray-icons.git";
-    rev = "22b74b9a602560bf71ffbb6959b161afeeebe2ff";
-    sha256 = "0c5jpf5d1yzfwv6b0yam3hg980hfw0rck3r70y2hshvncmvk30w0";
+    rev = "bde2b275f7afe4b4b252836ad73fd31b8aa5a9ac";
+    sha256 = "06wdyzikzbbij77id0zg6nxxjaddn9af9h2sjfbqh3kjz4nwj2z6";
   };
 
   installPhase = ''
