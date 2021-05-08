@@ -11,8 +11,8 @@ in stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/share/gnome-shell/extensions/${uuid}
     cp -r * $out/share/gnome-shell/extensions/${uuid}
-    sed -i "2i imports.gi.GIRepository.Repository.prepend_search_path('${
+    sed -i "/use strict/a imports.gi.GIRepository.Repository.prepend_search_path('${
       callPackage ./libanimation.nix { }
-    }/lib/girepository-1.0');" $out/share/gnome-shell/extensions/${uuid}/effectsNative.js
+    }/lib/girepository-1.0');" $out/share/gnome-shell/extensions/${uuid}/effects*.js
   '';
 }
