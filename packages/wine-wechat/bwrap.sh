@@ -16,10 +16,12 @@ bindsrcs+=(/etc/fonts)
 bindsrcs+=(/bin/sh)
 
 for binds in ${bindsrcs[@]};do
-    binding+=(--ro-bind $binds $binds)
-    for path in $(@nix@/bin/nix path-info -r $(realpath $binds));do
-        binding+=(--ro-bind $path $path)
-    done
+    if [[ -e "${binds}" ]];then
+        binding+=(--ro-bind $binds $binds)
+        for path in $(@nix@/bin/nix path-info -r $(realpath $binds));do
+            binding+=(--ro-bind $path $path)
+        done
+    fi
 done
 
 homedir=@fakeHome@
