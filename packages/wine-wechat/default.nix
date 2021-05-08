@@ -1,8 +1,12 @@
-{ stdenv, lib, wine, winetricks, fetchpatch, fetchurl, gnutar, zstd, python3
+{ stdenv, lib, fetchpatch, fetchurl, gnutar, zstd, python3
 , makeWrapper, srcOnly, substituteAll, runCommand, bubblewrap, coreutils, nix
 , extraROMountPoints ? { }, extraMountPoints ? { }
 , fakeHome ? "$HOME/.local/fakefs/wechat" }:
 let
+  # Known runnable version
+  inherit ((builtins.getFlake
+    "github:NixOS/nixpkgs/aa4a14b7ad268ad423e2a4bac065fa9acd02d652").legacyPackages.${stdenv.system})
+    wine winetricks;
   srcHash = "0x8bs13iqwa7pi91z6kmgm7ybma1rpmxbqd3zp7h3inrm8h7ndph";
   version = "3.0.0.57-2";
   source = stdenv.mkDerivation {
