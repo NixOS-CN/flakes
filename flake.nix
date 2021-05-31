@@ -106,9 +106,7 @@
           filterBySystem system (mapRecurseIntoAttrs (makePackageScope pkgs));
         outtree-packages = # filterBySystem system
           (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
-            (_: output:
-              (attrByPath [ "packages" system ] { } output)
-              // (attrByPath [ "legacyPackages" system ] { } output)))));
+            (_: output: attrByPath [ "packages" system ] { } output))));
       in rec {
         legacyPackages = intree-packages // { re-export = outtree-packages; };
         apps = {
