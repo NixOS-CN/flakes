@@ -49,7 +49,9 @@
           recursiveUpdate set (setAttrByPath (getAttrPath target) (f target)))
         { } (listNixFilesRecursive dir);
       makePackageSet = f: getPackages f ./packages;
-      makePackageScope = pkgs: makeScope pkgs.newScope  (self: (makePackageSet (n: self.callPackage n { })) ) ;
+      makePackageScope = pkgs:
+        makeScope pkgs.newScope
+        (self: (makePackageSet (n: self.callPackage n { })));
 
       toNixOSCNRegistries = mapAttrs (name: entry: {
         from = {
@@ -74,10 +76,16 @@
       registries;
       extractFromRegistries = f:
         filterAttrs (_: v: v != { }) (mapAttrs f registryOutputs);
-      mapRecurseIntoAttrs = s:
-        mapAttrs (_: v:
-          if !isAttrs v || isDerivation v then v else mapRecurseIntoAttrs v)
-        (recurseIntoAttrs s);
+      mapRecurseIntoAttrs' = key: s:
+        if any (k: k == key) (attrNames s) then
+          s
+        else
+          mapAttrs (k: v:
+            if !isAttrs v || isDerivation v then
+              v
+            else
+              mapRecurseIntoAttrs' k v) (recurseIntoAttrs s);
+      mapRecurseIntoAttrs = mapRecurseIntoAttrs' null;
       mergeAttrsUniquely = s:
         let
           nameCount = zipAttrsWith (name: values: length values) (attrValues s);
@@ -94,8 +102,8 @@
           inherit system;
           config.allowUnfree = true;
         });
-        intree-packages = filterBySystem system
-          (mapRecurseIntoAttrs (makePackageScope pkgs));
+        intree-packages =
+          filterBySystem system (mapRecurseIntoAttrs (makePackageScope pkgs));
         outtree-packages = # filterBySystem system
           (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
             (_: output:
@@ -141,8 +149,7 @@
           checks;
       }) // {
         overlay = final: prev: {
-          nixos-cn =
-            mapRecurseIntoAttrs (makePackageScope final);
+          nixos-cn = mapRecurseIntoAttrs (makePackageScope final);
         };
         nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
