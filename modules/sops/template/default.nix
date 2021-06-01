@@ -78,9 +78,8 @@ in {
   };
 
   config = mkIf (config.sops.templates != { }) {
-    system.activationScripts.setup-sops-templates =
-      stringAfter [ "setup-secrets" ] ''
-        echo setting up sops templates...
+    sops.extendScripts.post-sops-install-secrets = ''
+        echo Setting up sops templates...
         ${concatMapStringsSep "\n" (name:
           let tpl = config.sops.templates.${name};
           in ''
