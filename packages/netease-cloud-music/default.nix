@@ -1,12 +1,12 @@
 { alsaLib, autoPatchelfHook, dpkg, e2fsprogs, fetchurl, fontconfig, freetype
-, gdk-pixbuf, glib, harfbuzz, lib, libGL, libgpgerror, libusb, makeWrapper
+, gdk-pixbuf, glib, harfbuzz, lib, libdrm, libGL, libgpgerror, libusb, makeWrapper
 , p11-kit, pango, qt5, stdenv, xorg, zlib }:
 stdenv.mkDerivation rec {
   pname = "netease-cloud-music";
-  version = "1.2.0";
+  version = "1.2.1";
   src = fetchurl {
     url =
-      "http://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb";
+      "http://d1.music.126.net/dmusic/netease-cloud-music_${version}_amd64_ubuntu_20190428.deb";
     sha256 = "1fzc5xb3h17jcdg8w8xliqx2372g0wrfkcj8kk3wihp688lg1s8y";
     curlOpts = "-A 'Mozilla/5.0'";
   };
@@ -22,6 +22,7 @@ stdenv.mkDerivation rec {
     gdk-pixbuf
     glib
     harfbuzz
+    libdrm
     libGL
     libgpgerror
     libusb
@@ -59,7 +60,7 @@ stdenv.mkDerivation rec {
     description = "Client for Netease Cloud Music service";
     homepage = "https://music.163.com";
     platforms = [ "x86_64-linux" ];
-    maintainers = [ stdenv.lib.maintainers.mlatus ];
-    license = stdenv.lib.licenses.unfree;
+    maintainers = [ lib.maintainers.mlatus ];
+    license = lib.licenses.unfree;
   };
 }
