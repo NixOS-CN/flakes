@@ -95,6 +95,8 @@
               nameValuePair "${n}-${name}" v
             else
               nameValuePair n v) s.${name})) { } (attrNames s);
+      isUnfree = licenses: any (l: !l.free or true) (toList licenses);
+      hasUnfreeLicense = attrs: attrs ? meta.license && isUnfree (attrs.meta.license);
 
     in eachDefaultSystem (system:
       let
@@ -142,9 +144,7 @@
         };
 
         checks = flattenTree intree-packages;
-        hydraJobs = filterAttrs
-          (_: v: !(hasAttrByPath [ "meta" "license" ] v) || v.meta.license.free)
-          checks;
+        hydraJobs = filterAttrs (_: v: !(hasUnfreeLicense v)) checks;
       }) // {
         overlay = final: prev: {
           nixos-cn = mapRecurseIntoAttrs (makePackageScope final);
