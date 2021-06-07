@@ -58,7 +58,7 @@ in runCommand "wechat" {
   inherit (stdenv) shell;
   buildInputs = [ makeWrapper ];
   exportReferencesGraph = [ "scriptRefs" script "zstdRefs" zstd "coreRefs" coreutils ];
-  meta.license = stdenv.lib.licenses.unfree;
+  meta.license = lib.licenses.unfree;
 } ''
   mkdir -p $out/bin
   cp -r --no-preserve=all ${source}/usr/share $out

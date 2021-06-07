@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, fetchFromGitHub, bzip2, python3 }:
+{ stdenv, lib, fetchurl, fetchFromGitHub, bzip2, python3 }:
 let
   data = let rev = "4232818ed889ba60e33d5bf5fc47d28f27a911f9";
   in {
@@ -40,7 +40,7 @@ in stdenv.mkDerivation rec {
   dontBuild = true;
   installPhase = let
     libDir = "${outPath}/lib/security/howdy";
-    inherit (stdenv.lib) mapAttrsToList concatStrings;
+    inherit (lib) mapAttrsToList concatStrings;
   in ''
         mkdir -p ${outPath}/share/licenses/howdy
         install -Dm644 LICENSE ${outPath}/share/licenses/howdy/LICENSE
