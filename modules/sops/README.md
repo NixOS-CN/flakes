@@ -1,6 +1,6 @@
 一些对 [sops-nix](https://github.com/Mic92/sops-nix) 的扩展, 依赖 `sops` 模块.
 
-## sops.template.\<name\>
+## sops.templates.\<name\>
 当你需要使用 sops 加密某个文件的一部分的时候会比较有用.
 
 ### 用例
@@ -17,18 +17,18 @@
 { ... }: {
   services.v2ray = {
     enable = true;
-    configFile = config.sops.template.v2ray.path; # 开机解密后的文件路径
+    configFile = config.sops.templates.v2ray.path; # 开机解密后的文件路径
   };
-  
-  # 定义文件内容, 开机后这部分内容会被拷贝到 `config.sops.template.v2ray.path`
-  sops.template.v2ray.content = builtins.toJSON {
+
+  # 定义文件内容, 开机后这部分内容会被拷贝到 `config.sops.templates.v2ray.path`
+  sops.templates.v2ray.content = builtins.toJSON {
     inbounds = [{
       port = 1080;
       listen = "127.0.0.1";
       protocol = "http";
       settings = {
         accounts = [{
-          # 文件 `config.sops.template.v2ray.path` 中
+          # 文件 `config.sops.templates.v2ray.path` 中
           # `config.sops.placeholder.v2ray-user` 对应部分的内容
           # 会被替换为 `config.sops.secrets.v2ray-user.path` 中的内容,
           # 以此类推
