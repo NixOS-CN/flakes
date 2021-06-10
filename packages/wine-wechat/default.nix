@@ -1,5 +1,5 @@
-{ stdenv, lib, fetchpatch, fetchurl, gnutar, zstd, python3
-, makeWrapper, srcOnly, substituteAll, runCommand, bubblewrap, coreutils, nix
+{ stdenv, lib, fetchpatch, fetchurl, gnutar, zstd, python3, makeWrapper, srcOnly
+, substituteAll, runCommand, bubblewrap, coreutils, nix, scopedMount ? true
 , extraROMountPoints ? { }, extraMountPoints ? { }
 , fakeHome ? "$HOME/.local/fakefs/wechat" }:
 let
@@ -53,19 +53,29 @@ let
       makeBindOption "--bind" extraMountPoints
     })";
 
-in runCommand "wechat" {
-  inherit bubblewrap coreutils nix script mountPoints fakeHome;
-  inherit (stdenv) shell;
-  buildInputs = [ makeWrapper ];
-  exportReferencesGraph = [ "scriptRefs" script "zstdRefs" zstd "coreRefs" coreutils ];
-  meta.license = lib.licenses.unfree;
-} ''
-  mkdir -p $out/bin
-  cp -r --no-preserve=all ${source}/usr/share $out
-  substituteAll ${./bwrap.sh} $out/bin/wechat
-  chmod +x $out/bin/wechat
-  wrapProgram $out/bin/wechat --prefix PATH : ${lib.makeBinPath [ zstd coreutils ]}
+in if scopedMount then
+  runCommand "wechat" {
+    inherit bubblewrap coreutils nix script mountPoints fakeHome;
+    inherit (stdenv) shell;
+    buildInputs = [ makeWrapper ];
+    exportReferencesGraph =
+      [ "scriptRefs" script "zstdRefs" zstd "coreRefs" coreutils ];
+    meta.license = lib.licenses.unfree;
+  } ''
+    mkdir -p $out/bin
+    cp -r --no-preserve=all ${source}/usr/share $out
+    substituteAll ${./bwrap.sh} $out/bin/wechat
+    chmod +x $out/bin/wechat
+    wrapProgram $out/bin/wechat --prefix PATH : ${
+      lib.makeBinPath [ zstd coreutils ]
+    }
 
-  mkdir -p $out/share/wechat
-  cat scriptRefs zstdRefs coreRefs|grep '^/'|sort|uniq > $out/share/wechat/nix-closure
-''
+    mkdir -p $out/share/wechat
+    cat scriptRefs zstdRefs coreRefs|grep '^/'|sort|uniq > $out/share/wechat/nix-closure
+  ''
+else
+  runCommand "wechat" { meta.license = lib.licenses.unfree; } ''
+    mkdir -p $out/bin
+    cp ${script} $out/bin/wechat
+    cp -r --no-preserve=all ${source}/usr/share $out
+  ''
