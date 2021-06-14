@@ -2,7 +2,7 @@ name: "Update flake registries"
 on:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   update:
