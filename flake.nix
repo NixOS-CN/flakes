@@ -50,8 +50,9 @@
         { } (listNixFilesRecursive dir);
       makePackageSet = f: getPackages f ./packages;
       makePackageScope = pkgs:
-        makeScope pkgs.newScope
-        (self: (makePackageSet (n: self.callPackage n { })));
+        makeScope pkgs.newScope (self:
+          (makePackageSet
+            (n: self.callPackage n { } // { __definition_entry = n; })));
 
       toNixOSCNRegistries = mapAttrs (name: entry: {
         from = {
@@ -141,6 +142,61 @@
                 cat ${hash}
               '';
             };
+          update-packages = let
+            actions = map (n: {
+              action = n.updateAction;
+              entry = removePrefix (toString self + "/") (toString n.__definition_entry);
+            }) (filter (n: n ? updateAction)
+              (collect (n: n ? __definition_entry) intree-packages));
+          in mkApp {
+            drv = pkgs.writeShellScriptBin "update-packages" ''
+              ${concatMapStringsSep "\n" (p: with p; ''
+                # <<<sh>>>
+                if [[ ! -e "${entry}" ]];then
+                  echo "${entry} does not exist, skip."
+                else
+                  root_dir=$(pwd)
+                  if [[ -d "${entry}" ]];then
+                    echo Updating sources under "${entry}"
+                    cd "${entry}"
+                  else
+                    echo Updating "${entry}"
+                    cd "${dirOf entry}"
+                  fi
+
+                  commit_msg="$(${action})"
+                  cd "''${root_dir}"
+
+                  rollback=0
+                  for f in $(git diff --name-only);do
+                    if [[ ( -d "${entry}" && ! "$f" =~ "${entry}".* ) || ( -f "${entry}" && ! "$f" == "${entry}" ) ]];then
+                      echo "$f" is modified, but this is not allowed here.
+                      rollback=1
+                    fi
+                  done
+
+                  if [[ $rollback -eq 0 ]];then
+                    echo Check builds.
+                    nix flake check || rollback=1
+                  fi
+
+                  if [[ $rollback -eq 1 ]];then
+                    echo Rollback changes.
+                    git stash
+                  else
+                    echo Commit changes.
+                    if [[ -n "''${commit_msg}" ]];then
+                      git diff-index --quiet HEAD || git commit -am "''${commit_msg} - Automated Commit"
+                    else
+                      git diff-index --quiet HEAD || git commit -am "Update ${entry} - Automated Commit"
+                    fi
+                    git push
+                  fi
+                fi
+                # >>>sh<<<
+              '') actions}
+            '';
+          };
         };
 
         checks = flattenTree intree-packages;
