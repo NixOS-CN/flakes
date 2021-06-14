@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, qt5, mpv, aria2, lua }: stdenv.mkDerivation {
+{ stdenv, fetchFromGitHub, qt5, mpv, aria2, lua, update-nix-fetchgit }: stdenv.mkDerivation {
   pname = "kikoplay";
   version = "2020-10-21";
 
@@ -19,4 +19,5 @@
   '';
 
   meta.description = "KikoPlay - NOT ONLY A Full-Featured Danmu Player";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }
