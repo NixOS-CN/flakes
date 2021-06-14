@@ -190,7 +190,6 @@
                     else
                       git diff-index --quiet HEAD || git commit -am "Update ${entry} - Automated Commit"
                     fi
-                    git push
                   fi
                 fi
                 # >>>sh<<<
