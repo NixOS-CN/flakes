@@ -1,4 +1,4 @@
-name: "Update flake registries"
+name: "Update dependencies and sources"
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -30,10 +30,8 @@ jobs:
       run: nix flake update --recreate-lock-file
     - name: Commit if build succeed
       run: |
-        nix flake check \
-        && (git diff-index --quiet HEAD || git commit -am "Update dependencies - Automated Commit") \
-        || git stash
-        git push
+        git diff-index --quiet HEAD \
+        || (nix flake check && git commit -am "Update dependencies - Automated Commit" && git push || git stash)
     - name: Update registries
       run: |
         echo "OLD_HASH=$(nix run .#re-export-hash)" >> $GITHUB_ENV
@@ -47,11 +45,12 @@ jobs:
         echo NEW_HASH is ${NEW_HASH}
         git diff-index --quiet HEAD || if [[ "${NEW_HASH}" != "${OLD_HASH}" ]];then
             nix flake check \
-            && git commit -am "Update registries - Automated Commit" \
-            || git stash
-            git push
+            && git commit -am "Update registries - Automated Commit" && git push \
+            || git stash 
+        else
+            git stash
         fi
     - name: Update packages
       run: |
         nix run .#update-packages
-        git push
+        git push || true
