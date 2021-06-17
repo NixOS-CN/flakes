@@ -1,4 +1,4 @@
-{ stdenv, fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "gnome-shell-extension-x11gestures";
   src = fetchgit {
@@ -11,4 +11,5 @@ stdenv.mkDerivation {
     mkdir -p $out/share/gnome-shell/extensions/x11gestures@joseexposito.github.io
     cp -r * $out/share/gnome-shell/extensions/x11gestures@joseexposito.github.io
   '';
+  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

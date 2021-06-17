@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, glib }:
+{ stdenv, fetchFromGitHub, glib, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "flat-remix-gnome";
   src = fetchFromGitHub {
@@ -12,4 +12,5 @@ stdenv.mkDerivation {
     mkdir -p $out/share/themes
     cp -r Flat-Remix-* $out/share/themes
   '';
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

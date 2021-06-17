@@ -9,7 +9,8 @@
 , lib
 , cmake
 , pkgconfig
-, fetchFromGitHub }:
+, fetchFromGitHub
+, update-nix-fetchgit }:
 let
   out = placeholder "out";
 in
@@ -55,4 +56,5 @@ stdenv.mkDerivation {
     license = lib.licenses.gpl3;
     platforms = lib.platforms.linux;
   };
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

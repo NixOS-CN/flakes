@@ -1,4 +1,4 @@
-{ stdenv, fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "gruvbox-dark-yellow-theme";
   src = fetchgit {
@@ -12,4 +12,5 @@ stdenv.mkDerivation {
     mkdir -p $out/share/themes/Gruvbox-Dark-Yellow
     cp -r * $out/share/themes/Gruvbox-Dark-Yellow
   '';
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

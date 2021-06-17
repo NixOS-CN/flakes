@@ -1,4 +1,4 @@
-{ vimUtils, fetchFromGitHub, python3 }:
+{ vimUtils, fetchFromGitHub, python3, update-nix-fetchgit }:
 let
   inherit (vimUtils) buildVimPluginFrom2Nix;
 
@@ -10,6 +10,7 @@ let
   };
 
 in {
+  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 
   mundo = buildVimPluginFrom2Nix {
     name = "vim-mundo";

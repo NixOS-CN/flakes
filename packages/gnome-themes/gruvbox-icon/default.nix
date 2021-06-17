@@ -1,4 +1,4 @@
-{ stdenv, fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 stdenv.mkDerivation rec {
   name = "gruvbox-icon";
   src = fetchgit {
@@ -11,4 +11,5 @@ stdenv.mkDerivation rec {
     mkdir -p $out/share
     cp -r icons $out/share
   '';
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

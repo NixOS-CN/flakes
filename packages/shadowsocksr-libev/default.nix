@@ -1,5 +1,6 @@
-{ gcc7Stdenv, fetchgit, libsodium, libev, pcre, asciidoc, xmlto, docbook_xml_dtd_45
-, docbook_xsl, zlib, openssl, udns, autoconf, automake, libtool, patchelf }:
+{ gcc7Stdenv, fetchgit, libsodium, libev, pcre, asciidoc, xmlto
+, docbook_xml_dtd_45, docbook_xsl, zlib, openssl, udns, autoconf, automake
+, libtool, patchelf, update-nix-fetchgit }:
 gcc7Stdenv.mkDerivation {
   name = "shadowsocksr-libev";
   src = fetchgit {
@@ -33,5 +34,7 @@ gcc7Stdenv.mkDerivation {
 
   dontStrip = true;
 
-  meta.description = "Shadowsocksr-libev is a lightweight secured SOCKS5 proxy for embedded devices and low-end boxes";
+  meta.description =
+    "Shadowsocksr-libev is a lightweight secured SOCKS5 proxy for embedded devices and low-end boxes";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

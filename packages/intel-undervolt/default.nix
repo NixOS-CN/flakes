@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, pkgconfig, coreutils }:
+{ stdenv, fetchFromGitHub, pkgconfig, coreutils, update-nix-fetchgit }:
 let outDir = placeholder "out";
 in stdenv.mkDerivation rec {
   name = "intel-undervolt";
@@ -21,4 +21,5 @@ in stdenv.mkDerivation rec {
   '';
 
   meta.description = "Intel CPU undervolting and throttling configuration tool";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

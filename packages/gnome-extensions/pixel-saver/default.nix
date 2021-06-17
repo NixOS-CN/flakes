@@ -1,4 +1,4 @@
-{ stdenv, fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "pixel-saver";
   src = fetchgit {
@@ -11,4 +11,5 @@ stdenv.mkDerivation {
     mkdir -p $out/share/gnome-shell/extensions
     cp -r pixel-saver@deadalnix.me $out/share/gnome-shell/extensions
   '';
+  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

@@ -1,4 +1,4 @@
-{ stdenv, fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "steal-my-focus";
   src = fetchgit {
@@ -14,4 +14,5 @@ stdenv.mkDerivation {
     cp *.js "$baseDir" 
     cp *.json "$baseDir"
   '';
+  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

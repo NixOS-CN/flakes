@@ -1,4 +1,4 @@
-{ stdenv, fetchgit, jq }:
+{ stdenv, fetchgit, jq, update-nix-fetchgit }:
 let uuid = "tray-icons@zhangkaizhao.com";
 in stdenv.mkDerivation {
   name = "dynamic-panel-transparent";
@@ -12,4 +12,5 @@ in stdenv.mkDerivation {
     mkdir -p $out/share/gnome-shell/extensions/${uuid}
     cp * $out/share/gnome-shell/extensions/${uuid}
   '';
+  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }
