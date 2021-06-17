@@ -95,5 +95,5 @@ module
 
 如果你不希望将你的包直接加入到 nixos-cn, 也可以选择提供你的 flakes url 作为 registry entry, 可参考 `registries.nix` 中已有的 registry entries.
 
-`registries.nix` 中的 entry 会被添加到 `nixosModules.nixos-cn-registries` 所提供的 registry 列表中, 并且每个 flake 提供的 `packages` 和 `legacyPackages` 都会被放入 `legacyPackages.re-export`.
-即 `github:nixos-cn/flakes#legacyPackages.re-export = fold (r: s: s // r.packages // r.legacyPackages) {} (getFlakes ./registries.nix)`.
+`registries.nix` 中的 entry 会被添加到 `nixosModules.nixos-cn-registries` 所提供的 registry 列表中, 并且每个 flake 提供的 `packages` 都会被放入 `legacyPackages.re-export`.
+即 `github:nixos-cn/flakes#legacyPackages.re-export = fold (r: s: s // r.packages) {} (getFlakes ./registries.nix)`.
