@@ -4,8 +4,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "daniruiz";
     repo  = "flat-remix-gtk";
-    rev   = "e42c0b24365dd197cb70b9accb9689b91fbe083b";
-    sha256 = "0lgnnwy77x8qvgda3qfc13nirw7rzb3l89k0pgvihmry74laks4p";
+    rev   = "811159c82498d0e77e4351b4177df9bf4b05958e";
+    sha256 = "0yhgw6hq2fbzb45zq78d28knym4zv1v07rab26sgzykn1x3j6yjp";
   };
   installPhase = ''
     mkdir -p $out/share/themes

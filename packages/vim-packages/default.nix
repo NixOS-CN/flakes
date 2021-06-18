@@ -5,8 +5,8 @@ let
   coc-source = fetchFromGitHub {
     owner = "neoclide";
     repo = "coc-sources";
-    rev = "0b112467f250b1bd3f92312a6b781018b485d973";
-    sha256 = "1x9idlhvvafwl7fk9cr13nlvqcy527c5vx7v8z1dj7czbxk7g6w3";
+    rev = "f1eb33de95504d27dbe84e338e9c772b3a08d3ee";
+    sha256 = "1fp704s4m4miaxccb95av7ril3zdk3v4z5bgx2cg2xnr21pz53z7";
   };
 
 in {
@@ -17,8 +17,8 @@ in {
     src = fetchFromGitHub {
       owner = "simnalamburt";
       repo = "vim-mundo";
-      rev = "4f8628caebe393ac1b84564e965f894d89a7582d";
-      sha256 = "0hmww1xln0rvvi8hy7sv9arjwlp40ks0b07irzqpm5xi93hgyq2n";
+      rev = "c6dcea90166750bb5ed40321749966b1a8020a1a";
+      sha256 = "1bd9xab96m2j6zcp6bh7k958wj95m8w40hczmn2qzpq3cvpy8nb0";
     };
   };
 
@@ -47,8 +47,8 @@ in {
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "07aa4b435a832b122154a157ab6892ac4efb81fb";
-      sha256 = "05cgypswm7qdl26jd6nfqahk2bmqvp482k9zjbk0an12kbzlsrz0";
+      rev = "53bfce7a254651469ce9577349811bc76d9af46c";
+      sha256 = "1xcwrjfvikb1qqyaic2m0fi12l0hmxj0y5mwx1h95karpydbb0rz";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
@@ -81,8 +81,8 @@ in {
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "d62e4c020681e98bed74371a4033671fe50fd5eb";
-      sha256 = "0fckv8lvh7xbvvzsy06vbxc95qbr3blgrg5j5n6571myjcwmm269";
+      rev = "c155c65398733c764bd104edf15eabec5a8ae89d";
+      sha256 = "1b9d02jjh5qm36c09ivb59wfas6zixchmgqccqbjr57pcq7bfdm1";
     };
   };
 
@@ -101,8 +101,8 @@ in {
     src = fetchFromGitHub {
       owner = "lambdalisue";
       repo = "gina.vim";
-      rev = "97116f338f304802ce2661c2e7c0593e691736f8";
-      sha256 = "1j3sc6dpnwp4fipvv3vycqb77cb450nrk5abc4wpikmj6fgi5hk0";
+      rev = "abdbe0fe33f3b6fc59e94f7cc3072768f8dfd8ac";
+      sha256 = "1f3shh6jxr5i1an2dbb1vmc0l2xg03fm6ava25ahxg4b5ka59bc5";
     };
   };
 
@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "11a581d1860a7ad2b6c1ee1e0ebbb000e81b9950";
-      sha256 = "0khbp05sgz07sazgkmv4pwrnnisswkagx4gwkw9slawm4qb1k93j";
+      rev = "f81570d1288fd974098e0f311f728469ca919155";
+      sha256 = "162j51rw1gv0gwip4d82qvmgpk7ky22xhhb2sjqm43zhjv3hqy0g";
     };
   };
 

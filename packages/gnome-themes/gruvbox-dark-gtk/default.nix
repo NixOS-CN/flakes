@@ -3,8 +3,8 @@ stdenv.mkDerivation rec {
   name = "gruvbox-dark-gtk";
   src = fetchgit {
     url = "https://github.com/jmattheis/gruvbox-dark-gtk";
-    rev = "a02c2286855a7fea3d5f17e2257c78f961afc944";
-    sha256 = "1j6080bvhk5ajmj7rc8sdllzz81iyafqic185nrqsmlngvjrs83h";
+    rev = "9f46a26ac94585d44ebc4fadac40cec8210337e8";
+    sha256 = "1gn8bkcaqx21jdrpc2cxv50lfzx4245jvhsxsrln6k2cryikbbqb";
   };
 
   dontBuild = true;
