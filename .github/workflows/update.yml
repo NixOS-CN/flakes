@@ -26,6 +26,10 @@ jobs:
       run: |
         git config --global user.name 'Automation - Ninlives'
         git config --global user.email 'wqseleven@gmail.com'
+    - uses: cachix/cachix-action@v10
+      with:
+        name: nixos-cn
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Update dependencies
       run: nix flake update --recreate-lock-file
     - name: Commit if build succeed
