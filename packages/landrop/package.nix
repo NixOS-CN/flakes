@@ -2,12 +2,12 @@
 , fetchFromGitHub, update-nix-fetchgit }:
 stdenv.mkDerivation {
   pname = "LANDrop";
-  version = "2021-06-10";
+  version = "2021-06-18";
   src = fetchFromGitHub {
     owner = "LANDrop";
     repo = "LANDrop";
-    rev = "0c10dc86e7dee4ec897bb3b27a32caee2ba8f9de";
-    sha256 = "1ddylrsadh4wi7rwbxpxji9153vpr0qy6hpfk2v4fsqj6f36j2r3";
+    rev = "57b867db5513617a045dfcdd73365c04e320e1cc";
+    sha256 = "0ll4sldyjnwpbm2cmzfj5cy0xr35fxqjdkv3936spvza3rmnhjga";
   };
 
   nativeBuildInputs = [ qmake wrapQtAppsHook ];
