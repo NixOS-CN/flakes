@@ -1,4 +1,4 @@
-{ stdenv, fetchgit, update-nix-fetchgit }:
+{ stdenv, fetchgit, glib, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "gnome-shell-extension-x11gestures";
   src = fetchgit {
@@ -7,9 +7,17 @@ stdenv.mkDerivation {
     sha256 = "1q7n0arq6gnl0hzmk0qww1gfz0fn4la4vrdgn6p0rmn9nhchp1vj";
   };
 
+  nativeBuildInputs = [ glib.dev ];
+
+  buildPhase = ''
+    glib-compile-schemas schemas
+  '';
+
   installPhase = ''
     mkdir -p $out/share/gnome-shell/extensions/x11gestures@joseexposito.github.io
-    cp -r * $out/share/gnome-shell/extensions/x11gestures@joseexposito.github.io
+    cp -r COPYING COPYRIGHT extension.js prefs.js convenience.js metadata.json src schemas \
+    $out/share/gnome-shell/extensions/x11gestures@joseexposito.github.io
   '';
+
   updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }
