@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "8435587084210c0779a27ca59d98ce4b9c6af0f6";
-      sha256 = "1xg56c5b3n0igc4m3wik4ly8xcv8v3rhqsbza2yvk5g26ix3y472";
+      rev = "7c7b1afa679ac8e15ec57faa956bf3b037774043";
+      sha256 = "028qzvfq1wrfknawnwzmn414zagikfjxyj3iggrmi0b93384z3vv";
     };
   };
 
