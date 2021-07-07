@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, options, ... }:
 with lib;
 with lib.types;
 with builtins;
@@ -82,7 +82,7 @@ in {
     };
   };
 
-  config = mkIf (config.sops.templates != { }) {
+  config = optionalAttrs (options?sops.secrets) (mkIf (config.sops.templates != { }) {
     sops.placeholder = mapAttrs
       (name: _: mkDefault "<SOPS:${hashString "sha256" name}:PLACEHOLDER>")
       config.sops.secrets;
@@ -99,5 +99,5 @@ in {
           chgrp "${tpl.group}" "${tpl.path}"
         '') (attrNames config.sops.templates)}
     '';
-  };
+  });
 }
