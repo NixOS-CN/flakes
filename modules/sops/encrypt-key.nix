@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, options, ... }:
 with lib;
 let
   dir = "/run/sops-keys";
@@ -38,7 +38,7 @@ in {
     default = [ ];
   };
 
-  config = mkIf (keyFiles != [ ]) {
+  config = optionalAttrs (options?sops.sshKeyPaths) (mkIf (keyFiles != [ ]) {
     sops.sshKeyPaths = map getPath keyFiles;
     sops.extendScripts.pre-sops-install-secrets = ''
       echo Decrypting sops keys...
@@ -48,5 +48,5 @@ in {
         echo Erasing decrypted sops keys...
         rm -rf "${dir}"
       '';
-  };
+  });
 }
