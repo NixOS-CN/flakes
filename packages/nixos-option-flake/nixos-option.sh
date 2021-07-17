@@ -34,7 +34,7 @@ if [[ -z $flakeAttr ]]; then
 else
     flakeAttr="nixosConfigurations.\"$flakeAttr\""
 fi
-flake=$(nix --experimental-features 'nix-command flakes' flake info --json --no-write-lock-file -- "$flake" | @jq@ -r .url)
+flake=$(nix --experimental-features 'nix-command flakes' flake metadata --json --no-write-lock-file -- "$flake" | @jq@ -r .url)
 
 argfun=""
 for arg; do
