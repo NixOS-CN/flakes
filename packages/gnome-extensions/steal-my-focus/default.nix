@@ -14,5 +14,5 @@ stdenv.mkDerivation {
     cp *.js "$baseDir" 
     cp *.json "$baseDir"
   '';
-  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

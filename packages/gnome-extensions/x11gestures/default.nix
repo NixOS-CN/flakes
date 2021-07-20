@@ -19,5 +19,5 @@ stdenv.mkDerivation {
     $out/share/gnome-shell/extensions/x11gestures@joseexposito.github.io
   '';
 
-  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }

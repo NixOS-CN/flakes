@@ -1,4 +1,4 @@
-{ stdenv, python3, python3Packages, fetchurl, pam }:
+{ stdenv, python3, python3Packages, fetchurl, pam, cmake }:
 let outPath = placeholder "out";
 in stdenv.mkDerivation rec {
   pname = "pam-python";
@@ -14,6 +14,9 @@ in stdenv.mkDerivation rec {
     substituteInPlace src/test.py  --replace '/usr/bin/python2' '/usr/bin/python3'
     patchShebangs .
     substituteInPlace src/Makefile --replace '-Werror' '-O -Werror=cpp'
+    substituteInPlace src/Makefile --replace \
+      'ln -sf build/lib.*/$@ .' \
+      'ln -sf build/lib.*/pam_python.*.so ./pam_python.so'
     substituteInPlace src/Makefile --replace \
       'cp build/lib.*/pam_python.so $(DESTDIR)$(LIBDIR)' \
       'cp build/lib.*/pam_python.*.so $(DESTDIR)$(LIBDIR)/pam_python.so'

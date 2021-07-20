@@ -12,5 +12,5 @@ in stdenv.mkDerivation {
     mkdir -p $out/share/gnome-shell/extensions/${uuid}
     cp * $out/share/gnome-shell/extensions/${uuid}
   '';
-  updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }
