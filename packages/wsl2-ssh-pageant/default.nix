@@ -11,12 +11,8 @@
 
   vendorSha256 = "sha256-YxEoNWbhdkWFTC6k53ZHo0DaRtNUTHhOACi38mpw7+s=";
 
-  buildPhase = ''
-    GOOS=windows go build -o wsl2-ssh-pageant.exe main.go
+  preConfigure = ''
+    export GOOS=windows
   '';
-
-  installPhase = ''
-    mkdir -p ${placeholder "out"}/libexec
-    mv wsl2-ssh-pageant.exe ${placeholder "out"}/libexec/.
-  '';
+  dontStrip = true;
 }
