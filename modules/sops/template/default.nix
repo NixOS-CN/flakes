@@ -88,16 +88,18 @@ in {
       config.sops.secrets;
 
     sops.extendScripts.post-sops-install-secrets = ''
-      echo Setting up sops templates...
-      ${concatMapStringsSep "\n" (name:
-        let tpl = config.sops.templates.${name};
-        in ''
-          mkdir -p "${dirOf tpl.path}"
-          ${config.sops.substituteCmd} ${tpl.file} > ${tpl.path}
-          chmod "${tpl.mode}" "${tpl.path}"
-          chown "${tpl.owner}" "${tpl.path}"
-          chgrp "${tpl.group}" "${tpl.path}"
-        '') (attrNames config.sops.templates)}
+      if [[ -d "/run/secrets" ]];then
+        echo Setting up sops templates...
+        ${concatMapStringsSep "\n" (name:
+          let tpl = config.sops.templates.${name};
+          in ''
+            mkdir -p "${dirOf tpl.path}"
+            ${config.sops.substituteCmd} ${tpl.file} > ${tpl.path}
+            chmod "${tpl.mode}" "${tpl.path}"
+            chown "${tpl.owner}" "${tpl.path}"
+            chgrp "${tpl.group}" "${tpl.path}"
+          '') (attrNames config.sops.templates)}
+      fi
     '';
   });
 }
