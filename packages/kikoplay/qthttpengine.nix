@@ -1,6 +1,6 @@
 { stdenv, qtbase, cmake, fetchFromGitHub, wrapQtAppsHook }: stdenv.mkDerivation {
   pname = "qhttpengine";
-  version = "2018-03-22";
+  version = "unstable-2018-03-22";
 
   src = fetchFromGitHub {
     owner = "nitroshare";

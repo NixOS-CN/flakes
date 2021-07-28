@@ -1,6 +1,6 @@
 { stdenv, fetchFromGitHub, qt5, mpv, aria2, lua, update-nix-fetchgit }: stdenv.mkDerivation {
   pname = "kikoplay";
-  version = "2021-06-18";
+  version = "unstable-2021-06-18";
 
   src = fetchFromGitHub {
     owner = "Protostars";
