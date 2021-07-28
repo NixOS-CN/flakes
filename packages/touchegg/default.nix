@@ -16,7 +16,7 @@ let
 in
 stdenv.mkDerivation {
   pname = "touchegg";
-  version = "2021-07-07";
+  version = "unstable-2021-07-07";
 
   src = fetchFromGitHub {
     owner = "JoseExposito";
