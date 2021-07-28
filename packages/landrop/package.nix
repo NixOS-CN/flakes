@@ -2,7 +2,7 @@
 , fetchFromGitHub, update-nix-fetchgit }:
 stdenv.mkDerivation {
   pname = "LANDrop";
-  version = "2021-06-22";
+  version = "unstable-2021-06-22";
   src = fetchFromGitHub {
     owner = "LANDrop";
     repo = "LANDrop";
