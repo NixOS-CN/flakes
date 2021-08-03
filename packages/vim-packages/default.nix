@@ -47,8 +47,8 @@ in {
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "6444bd8ff17f656b27941fc47265ace2fe629458";
-      sha256 = "055ikmvl1hrv5mnkrazkyaank4cpcam65bqmvfqd2zlwhs3yggwl";
+      rev = "f2c8d5b70f4cad18db5f15e897ba006aeba08f80";
+      sha256 = "0vq9lb2vir0am85nwjqphdmlx7akvpvcfgw3mr15rvnc9spzh8ix";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
