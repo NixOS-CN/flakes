@@ -5,8 +5,8 @@ let
   coc-source = fetchFromGitHub {
     owner = "neoclide";
     repo = "coc-sources";
-    rev = "f1eb33de95504d27dbe84e338e9c772b3a08d3ee";
-    sha256 = "1fp704s4m4miaxccb95av7ril3zdk3v4z5bgx2cg2xnr21pz53z7";
+    rev = "67f8539df3745af9c67d6c71c4e9b446498336be";
+    sha256 = "19hyw6zhhj91rr31dsayi0vhyzwyiv1l033mkbchsbdwgkl53h5p";
   };
 
 in {
@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "662159eeb112c076d90b2c3fe799f16a8165e4a6";
-      sha256 = "0jazw69444zcvvzj7j8k2zjqwyymgcsvz42pxq10ll58apmjrzri";
+      rev = "8b1e79a1d04e4b077aab1706891ed48e397bcaea";
+      sha256 = "093hc1n899d1w2x07vq0x2lx144w2w8acnlsis1pmqj4d2z9c0bf";
     };
   };
 
