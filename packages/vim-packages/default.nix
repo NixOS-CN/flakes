@@ -189,4 +189,14 @@ in {
       sha256 = "1n2s8b7kya8dnn1d5b0dc8yadl92iwf58s7sb5950b6yyi3i3q7f";
     };
   };
+
+  soong = buildVimPluginFrom2Nix {
+    name = "soong.vim";
+    src = fetchFromGitHub {
+      owner = "cherrry";
+      repo = "soong.vim";
+      rev = "58f8a2b2e066f76f932b9683883689797b0d7274";
+      sha256 = "1mllzgp66ds79anpz1k6gz4dkp2hjhn79iwi8chsap1hrpjc4yp1";
+    };
+  };
 }
