@@ -38,8 +38,8 @@ in {
     default = [ ];
   };
 
-  config = optionalAttrs (options?sops.sshKeyPaths) (mkIf (keyFiles != [ ]) {
-    sops.sshKeyPaths = map getPath keyFiles;
+  config = optionalAttrs (options ? sops.gnupg.sshKeyPaths) (mkIf (keyFiles != [ ]) {
+    sops.sops.gnupg.sshKeyPaths = map getPath keyFiles;
     sops.extendScripts.pre-sops-install-secrets = ''
       echo Decrypting sops keys...
       ${script}
