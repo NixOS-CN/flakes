@@ -47,8 +47,8 @@ in {
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "b35e18e02b9500fbb2773f6d494727cdca25e2d7";
-      sha256 = "1l9flkh38l9iwp1dbnx3fpyv6x2680bshalyw9nw1ixxhx6ys456";
+      rev = "ea474ca50d8600357d4e364178ffc0b55db499ea";
+      sha256 = "10g9n66jv9wjry57vzz4psdbddch75w1mn28a7zzlqps7k47amgp";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "9ca394ec3a9305a6c30018ee6f731c9b23a4b25e";
-      sha256 = "0w1nkiqnbskz8cj02nm9idhsavilk0akvfh4nagk72xvxvmxggi9";
+      rev = "4a392902152dd2c152608aa9f7ad73f73d26fcdd";
+      sha256 = "0qb4r7irn5902xs8pv68wbmsch5lja6dv5flyinmfwrqcb9qagah";
     };
   };
 
