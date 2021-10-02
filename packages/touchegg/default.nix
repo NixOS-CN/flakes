@@ -16,13 +16,13 @@ let
 in
 stdenv.mkDerivation {
   pname = "touchegg";
-  version = "unstable-2021-09-29";
+  version = "unstable-2021-10-01";
 
   src = fetchFromGitHub {
     owner = "JoseExposito";
     repo = "touchegg";
-    rev = "bb9a602fc01ce279b00f1081d720b9aa08e24cff";
-    sha256 = "1vddxjvxqbvbgzx4w3zk9wdrqahv9slf74m9jj6312y82lq3w0cs";
+    rev = "02a39c6d27b1d8afb224b346b292f04b5bc131fd";
+    sha256 = "0xncga8r4l6jq7bkhc6hka6kwzqikqkr0v4080mrc4j184q2dmps";
   };
 
   preConfigure = ''
