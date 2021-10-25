@@ -8,6 +8,7 @@ stdenv.mkDerivation {
     rev = "b8e910530e6ebfd6db08f0379ebf3f9315465d5f";
     sha256 = "03mm8vkrf3qdr90zajs07fws6q2nk75dvkkvir1rk4a7d1xrgh7y";
   };
+  patches = [ ./remove-test.patch ];
   nativeBuildInputs = [ wrapGAppsHook ];
   buildInputs =
     [ meson ninja gobject-introspection glib pkgconfig gmock gtest ];

@@ -1,0 +1,13 @@
+diff --color -uar ./source.old/meson.build ./source.new/meson.build
+--- ./meson.build	2021-10-25 15:05:12.186948036 +0800
++++ ./meson.build	2021-10-25 15:10:27.812893102 +0800
+@@ -36,9 +36,7 @@
+ endif
+ 
+ animation_inc = include_directories('.')
+-tests_inc = include_directories('tests')
+ 
+ subdir('animation')
+ subdir('animation-glib')
+ subdir('matchers')
+-subdir('tests')
