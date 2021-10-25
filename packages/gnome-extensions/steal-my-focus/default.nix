@@ -3,8 +3,8 @@ stdenv.mkDerivation {
   name = "steal-my-focus";
   src = fetchgit {
     url = "https://github.com/Ninlives/gnome-shell-extension-stealmyfocus";
-    rev = "06da2000d37d1eb9e9c421987b7baaf7fb58d3c2";
-    sha256 = "0qb1cmvlld4l6j5z8lvg56mqghai13y0n35fvbk6pkmma20a58n9";
+    rev = "2d4d9228a1c4f5df66531721156d466425e14496";
+    sha256 = "0sjrnb6q1zxipx23wc8j3sjkdqszd1kbi3rdrmjn2ynn2kq8l8lv";
   };
 
   dontBuild = true;
