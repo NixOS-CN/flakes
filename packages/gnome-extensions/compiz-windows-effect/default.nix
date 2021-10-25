@@ -15,5 +15,5 @@ in stdenv.mkDerivation {
       callPackage ./libanimation.nix { }
     }/lib/girepository-1.0');" $out/share/gnome-shell/extensions/${uuid}/effects*.js
   '';
-  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
+  passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *.nix";
 }
