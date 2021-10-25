@@ -31,7 +31,7 @@ jobs:
         name: nixos-cn
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Update dependencies
-      run: nix flake update --recreate-lock-file
+      run: nix flake update
     - name: Commit if build succeed
       run: |
         git diff-index --quiet HEAD \
