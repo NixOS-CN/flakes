@@ -3,8 +3,8 @@ stdenv.mkDerivation {
   name = "gnome-shell-extension-x11gestures";
   src = fetchgit {
     url = "https://github.com/JoseExposito/gnome-shell-extension-x11gestures.git";
-    rev = "ba0a6146804c866bf5681dbdf6a071c75ddb41e9";
-    sha256 = "02brm0f237kgv82f2k0a75mkk5b40082f7sjd14bsrxz7njrwz1b";
+    rev = "ca080985a570b94fcfd732f16344d115be9280bf";
+    sha256 = "0dsvbv3jw4kbqsjkdnqa2km0qq8fvgxa73y1pay75h81gfx2qs82";
   };
 
   nativeBuildInputs = [ glib.dev ];
