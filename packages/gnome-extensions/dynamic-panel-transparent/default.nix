@@ -4,8 +4,8 @@ in stdenv.mkDerivation {
   name = "dynamic-panel-transparent";
   src = fetchgit {
     url = "https://github.com/rockon999/dynamic-panel-transparency.git";
-    rev = "f9e720e98e40c7a2d87928d09a7313c9ef2e832c";
-    sha256 = "0njykxjiwlcmk0q8bsgqaznsryaw43fspfs6rzsjjz5p0xaq04nw";
+    rev = "63c8b81d5544cc1e6d2ee9fd236b705a531b641b";
+    sha256 = "1znb6h43cgbq5162spsx5prjzbckykr7g1afrfkh5j66zw6lv79a";
   };
 
   installPhase = ''
