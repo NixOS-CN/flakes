@@ -3,8 +3,8 @@ stdenv.mkDerivation {
   name = "pixel-saver";
   src = fetchgit {
     url = "https://github.com/pixel-saver/pixel-saver";
-    rev = "1d788807439209f59324aa9f11228a5ee08265b8";
-    sha256 = "0c6wfvqfhrzl4ac1j6bggymp1iqzimshny83brrhn2sv9ddwwdqp";
+    rev = "a7adee78f0df16ef9e824a22be5e0a0528d7d803";
+    sha256 = "1nq9cdv5gvq2mqrynzw3q0mwj3km6pi4qk6kix4kry86frbr8cwm";
   };
 
   installPhase = ''
