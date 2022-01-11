@@ -175,8 +175,8 @@ in {
     src = fetchFromGitHub {
       owner = "aca";
       repo = "vidir.nvim";
-      rev = "7d1716efca9fd7eae8fc151e32468352ad2ef0bd";
-      sha256 = "0klqyp6ky1i3hl0gxda2x8pqsbzf7zq6cwlzkyqys29qnqxisi6g";
+      rev = "0ebc07147c4a6d2cd143b8c8bf193d4c6a6d248e";
+      sha256 = "1wbib0vcr5qaj6dbsk8gd2ak3ams5af5dhsdac6m7q45wf842p6z";
     };
   };
 
