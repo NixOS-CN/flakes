@@ -1,9 +1,9 @@
 { alsaLib, autoPatchelfHook, dpkg, e2fsprogs, fetchurl, fontconfig, freetype
 , harfbuzz, lib, libdrm, libGL, libgpgerror, libusb, makeWrapper
-, p11-kit, pango, stdenv, xorg, zlib }:
+, p11-kit, stdenv, xorg, zlib }:
 let
   inherit ((builtins.getFlake "github:NixOS/nixpkgs/23485f23ff8536592b5178a5d244f84da770bc87").legacyPackages.${stdenv.system})
-  glib gdk-pixbuf qt5;
+  glib gdk-pixbuf qt5 pango;
 in 
 stdenv.mkDerivation rec {
   pname = "netease-cloud-music";
