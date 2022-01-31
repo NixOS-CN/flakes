@@ -5,8 +5,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "seemoo-lab";
     repo = "owl";
-    rev = "fb09463f6a3d175c125165b89ec39a25b33e14b1";
-    sha256 = "1w026cw8fcws1bi5hwnv654zzgdgb05vdv63zj0jrx59kb304b21";
+    rev = "8e4e840b212ae5a09a8a99484be3ab18bad22fa7";
+    sha256 = "1y6x8miz1irx3xg4mmhz9svvl5h7gymdxiskwip60n66a8j3wnch";
     fetchSubmodules = true;
   };
 
