@@ -17,8 +17,8 @@ in {
     src = fetchFromGitHub {
       owner = "simnalamburt";
       repo = "vim-mundo";
-      rev = "e193f185bad3aa58446e771f8f2739abf11d3262";
-      sha256 = "1q2j88rcg0slvm2bfdri4fy42h5a2md9bbqsspb3kzx5yrhgawhp";
+      rev = "595ee332719f397c2441d85f79608113957cc78f";
+      sha256 = "0kwiw877izpjqfj4gp4km8ivj6iy2c2jxyiqgxrvjqna62kic0ap";
     };
   };
 
