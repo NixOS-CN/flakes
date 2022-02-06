@@ -14,4 +14,9 @@
     owner = "berberman";
     repo = "flakes";
   };
+  linyinfeng = {
+    type = "github";
+    owner = "linyinfeng";
+    repo = "nur-packages";
+  };
 }
