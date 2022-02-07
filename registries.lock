@@ -1,11 +1,14 @@
 {
   "berberman": {
-    "rev": "d392de1ac543329dbb12dc805932f0802b893fe3"
+    "rev": "9a82db5a36cab0e3086af4cfe7a930e38a8de066"
+  },
+  "linyinfeng": {
+    "rev": "0866903340fd8b2e234a522407fa72d1df0e495d"
   },
   "netkit": {
     "rev": "29f750af4fabee7b8eccb5ab00df7074b73c7658"
   },
   "nickcao": {
-    "rev": "c6ee52c07543bf90ee088ef977c3e09225fd161b"
+    "rev": "2fea718ba15b5eebccd6e993ded408aedd604032"
   }
 }
