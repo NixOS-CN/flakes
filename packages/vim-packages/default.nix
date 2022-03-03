@@ -81,8 +81,8 @@ in {
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "7c58af8c83b6af82922e080943fcd4ee4f90ac92";
-      sha256 = "1rnvbwslzgfgf2r0agckhabhhkp5pswsijz33lnp9wc5ydjddxy5";
+      rev = "cf77298bf64f3c98a43c13ec2fc3e3a90b22f1ff";
+      sha256 = "1y2af5hg05wps2hc6msrsy5frqv213q0ylbj926a23d966yn36y0";
     };
   };
 
