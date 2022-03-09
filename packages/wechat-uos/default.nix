@@ -49,7 +49,14 @@ let
   };
 
   steam-run = (steam.override {
-    extraPkgs = p: [ license resource ];
+    extraPkgs = p: [
+      license
+      resource
+    ] ++ (with p; [
+      cups
+      libselinux
+      libgpgerror
+    ]);
     runtimeOnly = true;
   }).run;
 
