@@ -4,8 +4,8 @@ in stdenv.mkDerivation {
   name = "compiz-windows-effect";
   src = fetchgit {
     url = "https://github.com/hermes83/compiz-windows-effect";
-    rev = "41128b24cba39701fcd1e03ae1733e02df2bcf2d";
-    sha256 = "0n67jki5dzf0qj6k45d1l2m6lb6mlq523n3ypy5pgdppq8hpv7g9";
+    rev = "d72dd59a209ce4d138b0809931ac72d2520892a4";
+    sha256 = "03lxjdij2mzp1almzcwavgk489n252r01f1k030gnb2phgzibjlb";
   };
 
   installPhase = ''
