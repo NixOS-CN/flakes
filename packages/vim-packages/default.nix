@@ -81,8 +81,8 @@ in {
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "5b6367a429e9ad5af5f9dd4e0f389c88317c31e5";
-      sha256 = "1scaryxbmm6ljvj2b65znzzk67xnlwvq2jav6zwl7i46sxvp5siz";
+      rev = "a4483ec8be329018386a1351419e4d66bc0590b8";
+      sha256 = "19p5wjmcrlridbqpdafgcadpngi39y7y6s3ngn29zgx8cld9krdp";
     };
   };
 
@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "686a00f1defe0144851aa57000cfffe29dc6b219";
-      sha256 = "01zg2kzf9s2fsi7x06qbw5ljawy3pwgn7rfp39lmpw66445cq12m";
+      rev = "7ea1afcd82b0f637e2ab28fa12d02c6fac117848";
+      sha256 = "0wpa4sph1wll376ycpnnslksfay5mkas4j8nz9n1zm3zqnk5ickm";
     };
   };
 
