@@ -2,7 +2,7 @@
 
 这里是由 NixOS 中文社区维护的一个 [Nix Flakes](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html) , 包括社区成员贡献的一些包以及 NixOS 模块.
 
-目前社区成员主要在 [Telegram 群组](https://github.com/nixos-cn/NixOS-CN-telegram) 进行交流.
+目前社区成员主要在 [Telegram 群组](https://github.com/nixos-cn/NixOS-CN-telegram) 进行交流, 另有 [Matrix 群组](https://matrix.to/#/#nixos_zhcn:matrix.org).
 
 # 使用
 
