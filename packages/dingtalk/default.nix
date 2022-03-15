@@ -87,7 +87,7 @@ let
   ];
 in
 stdenv.mkDerivation rec {
-  pname = "dingtalk-resource";
+  pname = "dingtalk";
   inherit version;
   src = fetchurl {
     url = "https://dtapp-pub.dingtalk.com/dingtalk-desktop/xc_dingtalk_update/linux_deb/Release/com.alibabainc.dingtalk_${version}_amd64.deb";
