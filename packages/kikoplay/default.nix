@@ -1,12 +1,12 @@
 { stdenv, fetchFromGitHub, qt5, mpv, aria2, lua, update-nix-fetchgit }: stdenv.mkDerivation {
   pname = "kikoplay";
-  version = "unstable-2022-03-12";
+  version = "unstable-2022-03-16";
 
   src = fetchFromGitHub {
     owner = "Protostars";
     repo = "KikoPlay";
-    rev = "0275aa826f9d8e3cc8d408ec3d4efad086921a0f";
-    sha256 = "030vd8vwmkxdvvng4d1sglzsm7w0d7yvaa3vc16fs4jdqhvhw1q9";
+    rev = "f513ad1c89907a34a95b65700277e51e0644c4e3";
+    sha256 = "1a99hmys48ahggz3kjlhfk2b6v9n4x2ykrcpcsa16m1i6yg89yy8";
   };
 
   nativeBuildInputs = [ qt5.qmake qt5.wrapQtAppsHook ];
