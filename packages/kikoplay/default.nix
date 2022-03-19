@@ -5,8 +5,8 @@
   src = fetchFromGitHub {
     owner = "Protostars";
     repo = "KikoPlay";
-    rev = "b8c1cb9ac3ace9342f1149f90b09fa80f99cd5c0";
-    sha256 = "1vqrjxdsqg35a7jrjdvqbbncpf8s8vxjvvyppfsfpq6w01x8wbpg";
+    rev = "c4a030f182443b1ee8f1bbeac33a41d70d7f0366";
+    sha256 = "09mqj9rli6maicjgm08d0df38wmxfdn9cs1fhakl59420pi68p0y";
   };
 
   nativeBuildInputs = [ qt5.qmake qt5.wrapQtAppsHook ];
