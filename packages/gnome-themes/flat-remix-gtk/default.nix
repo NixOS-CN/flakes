@@ -4,8 +4,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "daniruiz";
     repo  = "flat-remix-gtk";
-    rev   = "5ee569ae2e178e8a9cead610d4ee8676c5024f44";
-    sha256 = "0axc14a8mvnh123s778yza6j7jz21y3bffm0a2bj5vbzmkh46w60";
+    rev   = "2632b82d83f4fec00e33d2c68b36dd7d5dd9bc98";
+    sha256 = "0psvyghyzff8rmy3qzy6kpg9bg3zi0qaw5zd475dsg58qcz9i09c";
   };
   dontBuild = true;
   makeFlags = [ "DESTDIR=${placeholder "out"}" "PREFIX=" ];
