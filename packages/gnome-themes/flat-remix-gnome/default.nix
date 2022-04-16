@@ -1,16 +1,17 @@
-{ stdenv, fetchFromGitHub, glib, update-nix-fetchgit }:
+{ stdenv, fetchFromGitHub, glib, dconf, update-nix-fetchgit }:
 stdenv.mkDerivation {
   name = "flat-remix-gnome";
   src = fetchFromGitHub {
     owner = "daniruiz";
     repo  = "flat-remix-gnome";
-    rev   = "cae94831513200f7e49c9806f86deaab1d7223ec";
-    sha256 = "1pn2fg9icyxbxgiw31b1ih7xcpl2p1gs0lnlqbqqfrykiiwkkyp3";
+    rev   = "847fd89b9140a1b319ac0f7b662d689d6f0a5b04";
+    sha256 = "0x70ql593hv5n7mdp6xan1dz5ns6w13g7ix26ylznvjdiwbjx7j3";
   };
-  buildInputs = [ glib.dev ];
-  installPhase = ''
-    mkdir -p $out/share/themes
-    cp -r Flat-Remix-* $out/share/themes
+  buildInputs = [ glib.dev dconf ];
+  makeFlags = [ "DESTDIR=dist" ];
+  postInstall = ''
+    mkdir -p $out/share/
+    mv dist/usr/share/flat-remix-gnome/themes $out/share/themes
   '';
   passthru.updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 }
