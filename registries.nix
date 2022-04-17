@@ -19,4 +19,9 @@
     owner = "linyinfeng";
     repo = "nur-packages";
   };
+  eh5 = {
+    type = "github";
+    owner = "EHfive";
+    repo = "flakes";
+  };
 }
