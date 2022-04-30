@@ -5,8 +5,8 @@ let
   coc-source = fetchFromGitHub {
     owner = "neoclide";
     repo = "coc-sources";
-    rev = "784366fff4b2b6e1a0cf9045f9548a0d6eb38d72";
-    sha256 = "03d989mj190f0pg51ab5kln3hgqq1rw3jkl3v3xac944j1p3amwr";
+    rev = "70564820ac1718b7f85f6cd9e67269500bd41211";
+    sha256 = "1l7lhys5vmb0ixnxrhis10yh68icq4a13qmpx0yy14kal9aiqg20";
   };
 
 in {
@@ -47,8 +47,8 @@ in {
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "82ccd0abdd4f1aa729a8262fea8fe0d811554f09";
-      sha256 = "0ka5kf6xryic910s7fd671w2nm7w3rzf81wpkk8q3z0ivmgpp4c2";
+      rev = "ae5028c6825273367cb542ed33122c9b267ae4b1";
+      sha256 = "1f5rf4axi3y0w0yx7hn00ik31yva6gmz34lsxdf3jvpnsg1l1aa7";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
