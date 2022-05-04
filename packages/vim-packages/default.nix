@@ -61,8 +61,8 @@ in {
     src = fetchFromGitHub {
       owner = "psliwka";
       repo = "vim-smoothie";
-      rev = "10fd0aa57d176718bc2c570f121ab523c4429a25";
-      sha256 = "18zn29mkgdiddn3il393xzg7hpa0x25yvais1l29jq2711sg4rdc";
+      rev = "f2aaab110b49da21ab7abf4858173e3194109f6a";
+      sha256 = "0yhspbc7vdlfwbjll859dmshb5kqndsmbpid1fmg0mcn5rwqpidw";
     };
   };
 
