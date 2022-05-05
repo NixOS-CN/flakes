@@ -61,8 +61,8 @@ in {
     src = fetchFromGitHub {
       owner = "psliwka";
       repo = "vim-smoothie";
-      rev = "f2aaab110b49da21ab7abf4858173e3194109f6a";
-      sha256 = "0yhspbc7vdlfwbjll859dmshb5kqndsmbpid1fmg0mcn5rwqpidw";
+      rev = "b440f139a55cb5161cde3478729f6603d9d20d81";
+      sha256 = "1hvv440zb3bwx1v8nyy3bk9vnhlbjy2a1hdfcmc37rghbni1kp0k";
     };
   };
 
@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "cf07a3ef217776f4fc231f6fcd91e3a4d28ee6de";
-      sha256 = "09hgn14qc1yr52njqxyi5qwbhxzx058avx7mmjgzvx8xbkriz9f1";
+      rev = "b6d9e427c9fafca5b84a1f429bef4df3ef63244b";
+      sha256 = "1s0f145kwfly4dffvplsldgyxpc2fw45qgdbi6wxm22jdaa40z49";
     };
   };
 
