@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, substituteAll, gnome3, wrapGAppsHook, python3, bluez
+{ stdenv, fetchFromGitHub, substituteAll, gtk3, wrapGAppsHook, python3, bluez
 , usbutils, gobject-introspection, gdk-pixbuf }:
 let pythonInUse = python3.withPackages (p: with p; [ pygobject3 ]);
 in stdenv.mkDerivation rec {
@@ -13,7 +13,7 @@ in stdenv.mkDerivation rec {
   patches = [ ./fix-path.patch ];
 
   nativeBuildInputs = [ wrapGAppsHook ];
-  buildInputs = [ pythonInUse gobject-introspection gnome3.gtk3 gdk-pixbuf ];
+  buildInputs = [ pythonInUse gobject-introspection gtk3 gdk-pixbuf ];
 
   outpath = "${placeholder "out"}";
   bluetoothctl = "${bluez}/bin/bluetoothctl";
