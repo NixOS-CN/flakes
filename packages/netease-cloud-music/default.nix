@@ -1,4 +1,4 @@
-{ alsaLib, autoPatchelfHook, dpkg, e2fsprogs, fetchurl, fontconfig, freetype
+{ alsa-lib, autoPatchelfHook, dpkg, e2fsprogs, fetchurl, fontconfig, freetype
 , harfbuzz, lib, libdrm, libGL, libgpgerror, libusb, makeWrapper
 , p11-kit, stdenv, xorg, zlib }:
 let
@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ qt5.wrapQtAppsHook makeWrapper autoPatchelfHook ];
   buildInputs = [
-    alsaLib
+    alsa-lib
     e2fsprogs
     fontconfig.lib
     freetype
