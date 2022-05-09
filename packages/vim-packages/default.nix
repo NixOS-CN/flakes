@@ -111,8 +111,8 @@ in {
     src = fetchFromGitHub {
       owner = "metakirby5";
       repo = "codi.vim";
-      rev = "086593fbf5f0891c9fa93cf14453ad14a79d3ed0";
-      sha256 = "0m8hgchb927kgcz65fkmk61w6ma5hvqfr221r7f9jbjzj49laaxd";
+      rev = "00b09bb4a02add481d4b7da82c5af8cdf65d957c";
+      sha256 = "1qrxczidvra7wpccvafm6vlkvxq8nd89wl1amcpn87dwkzibzkql";
     };
   };
 
