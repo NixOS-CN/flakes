@@ -4,8 +4,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "daniruiz";
     repo  = "flat-remix-gnome";
-    rev   = "f017462578b032a2fe973f2ef7927bfd9bae5104";
-    sha256 = "1jhg9qvb83ssybbv0ky7yp2lgq95ybpcla0abkd4xi8r32ncpf9y";
+    rev   = "0ccb5a3f073a4c428c6516003a4dd2a428e9ede7";
+    sha256 = "07izqmlgarih608m6dajsda1pi84wph3ygaw5r2b1sy3534wr627";
   };
   buildInputs = [ glib.dev dconf ];
   makeFlags = [ "DESTDIR=dist" ];
