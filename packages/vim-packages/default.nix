@@ -111,8 +111,8 @@ in {
     src = fetchFromGitHub {
       owner = "metakirby5";
       repo = "codi.vim";
-      rev = "00b09bb4a02add481d4b7da82c5af8cdf65d957c";
-      sha256 = "1qrxczidvra7wpccvafm6vlkvxq8nd89wl1amcpn87dwkzibzkql";
+      rev = "4da94d813cfcd83434098a24a277d6be43f5bf50";
+      sha256 = "0rr5i704bqw2w600jvgvxl35sx2gak2bbxz59wk7k7jyxrzbjam6";
     };
   };
 
@@ -155,8 +155,8 @@ in {
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "2f37b2ca07a3f89e7994b3b7f54c997e2cb3400a";
-      sha256 = "1n49d2ny93lxsv4ygcr9yn36p46ncaka9sxmynqjz7m27rn8xwny";
+      rev = "ce8a4d88f0ed1eed43369e90e024a7599490342a";
+      sha256 = "0253r3p30ygzkrm9r4b7hrdm67bq59qbzzmyx86h2r3kx9lmq0f2";
     };
   };
 
