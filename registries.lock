@@ -1,17 +1,17 @@
 {
   "berberman": {
-    "rev": "f2206e7528540ab54c17714f2b584ae792a38321"
+    "rev": "4eca0efcd41306120981c42791c499319e563a7b"
   },
   "eh5": {
-    "rev": "b2ec49828a5a8f0f3a3bd3b941d2f3ea12143474"
+    "rev": "fba7fbee7ecae29df19c0f60aa28ed9420cbdba4"
   },
   "linyinfeng": {
-    "rev": "04d74ec460c112b31a0423a7f23e0798a0fbf95d"
+    "rev": "f34ba18626fc86984003a720a70e05cc50a9cdba"
   },
   "netkit": {
     "rev": "29f750af4fabee7b8eccb5ab00df7074b73c7658"
   },
   "nickcao": {
-    "rev": "a81f10a78a5b4f65f8dfbe310e523f234985aadf"
+    "rev": "59de1d08569da98f80494644db52ecbfb493fc7f"
   }
 }
