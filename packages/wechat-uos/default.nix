@@ -5,6 +5,9 @@
 , steam
 , scrot
 , lib
+, makeWrapper
+, xdg-utils
+, runCommand
 }:
 
 ################################################################################
@@ -43,11 +46,18 @@ let
       tar xf data.tar.xz -C $out
       mv $out/usr/* $out/
       mv $out/opt/apps/com.tencent.weixin/files/weixin/resources/app $out/lib/wechat-uos
-      rm -rf $out/opt $out/usr
+      rm -rf $out/opt $out/usr $out/lib/wechat-uos/packages/main/dist/bin
       substituteInPlace $out/lib/wechat-uos/packages/main/dist/index.js \
         --replace '(__dirname,"bin","scrot","scrot")' '("${scrot}/bin","scrot")'
     '';
   };
+
+  pureXDGOpen = lib.hiPrio (runCommand "xdg" { nativeBuildInputs = [ makeWrapper ]; } ''
+    mkdir -p $out/bin
+    makeWrapper ${xdg-utils}/bin/xdg-open $out/bin/xdg-open \
+      --set LD_LIBRARY_PATH "" \
+      --set LD_PRELOAD ""
+  '');
 
   steam-run = (steam.override {
     extraPkgs = p: [
@@ -58,6 +68,7 @@ let
       libselinux
       libgpgerror
       scrot
+      pureXDGOpen
     ]);
     runtimeOnly = true;
   }).run;
