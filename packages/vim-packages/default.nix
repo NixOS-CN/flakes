@@ -17,8 +17,8 @@ in {
     src = fetchFromGitHub {
       owner = "simnalamburt";
       repo = "vim-mundo";
-      rev = "4cc954f5cad7ebf6c20b652c6cd6966940752b5b";
-      sha256 = "0k5f7kcvh3rb8d16lcp5q3hl4bx3s09rw5dni8h6i1mw15cbyyi1";
+      rev = "b9a6adbcfacc1ffe42ef3aa888f7c828a0b63746";
+      sha256 = "0x0xjijadzk3z3f4bs0k3rbhb760qcdczvn0c8m9gx678wfjshyd";
     };
   };
 
@@ -81,8 +81,8 @@ in {
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "5476c56da5b9fd814961e9576de059ef7115db2f";
-      sha256 = "1y6ks1bv9g6p2vivclhasv1i9y0lh1h4ikr1iz9qdarw5m018l5h";
+      rev = "dcb9bcadc47fd79fa4d9958a2f1adf90de963db3";
+      sha256 = "1iq1wlrflinmxyhkx1dn27rgwd76dm5p83pmph20wyfwia1p2h9k";
     };
   };
 
