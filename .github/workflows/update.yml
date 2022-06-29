@@ -12,14 +12,14 @@ jobs:
         NEW_HASH: "Unknown"
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         # Nix Flakes doesn't work on shallow clones
         fetch-depth: 0
     - name: Install nixFlake
-      uses: cachix/install-nix-action@v12
+      uses: cachix/install-nix-action@v17
       with:
-        install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.5pre20211019_4a2b7cc/install
+        install_url: https://github.com/numtide/nix-unstable-installer/releases/latest/download/install
         extra_nix_config: |
           experimental-features = nix-command flakes
     - name: Configure git
@@ -50,7 +50,7 @@ jobs:
         git diff-index --quiet HEAD || if [[ "${NEW_HASH}" != "${OLD_HASH}" ]];then
             nix flake check \
             && git commit -am "Update registries - Automated Commit" && git push \
-            || git stash 
+            || git stash
         else
             git stash
         fi
