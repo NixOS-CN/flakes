@@ -88,7 +88,7 @@ module
 ```nix
 { ... }: {
   imports = [
-    ./module/module-1.nix
+    ./module-1.nix
     ./module-2
     ./module-set/module-1.nix
     ./module-set/module-2.nix
