@@ -3,8 +3,8 @@ stdenv.mkDerivation {
   name = "adw-gtk3";
   src = fetchgit {
     url = "https://github.com/lassekongo83/adw-gtk3.git";
-    rev = "1d85089c829801ef3ef916236c8da9f2a9b5ad32";
-    sha256 = "1rm71c5rg5s644mmaf4wrqx0100psmnrhzfc893map25svhcdanb";
+    rev = "347c3b5db96d7bf797db5eaf5abc7662f4d08f3d";
+    sha256 = "0ca40ymngkphfhs336fyrmigl5v9av92kkh00iwr5mfdrsb7m0w5";
   };
 
   installPhase = ''
