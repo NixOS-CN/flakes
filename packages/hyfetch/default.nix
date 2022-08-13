@@ -1,22 +1,25 @@
-{ python3Packages, lib, fetchFromGitHub }:
+{ lib, fetchFromGitHub, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "HyFetch";
-  version = "1.1.2";
+  version = "1.4.0";
 
   src = fetchFromGitHub {
     repo = "hyfetch";
     owner = "hykilpikonna";
-    rev = "92623417f90f0cf006c0dd2adcf3f24f4308fe0c";
-    sha256 = "sha256-26L2qt+RarRf3+L6+mMy/ZJNVBVirKs5oEclEsImtC0=";
+    rev = version;
+    sha256 = "sha256-15FeW3yaM7eUJ1O20H/bQquDRAsRWTJMzkzQ5Kv1ezE=";
   };
+
+  # TODO: Remove with next release bump since it has been fixed upstream (hykilpikonna/hyfetch@d797a8c)
+  postPatch = ''
+    chmod +x neofetch
+  '';
 
   propagatedBuildInputs = with python3Packages; [
     typing-extensions
     setuptools
   ];
-
-  doCheck = false;
 
   meta = with lib; {
     description = "neofetch with pride flags <3";
@@ -32,5 +35,6 @@ python3Packages.buildPythonPackage rec {
     homepage = "https://github.com/hykilpikonna/HyFetch";
     license = licenses.mit;
     mainProgram = "hyfetch";
+    maintainers = with maintainers; [ yisuidenghua ];
   };
 }
