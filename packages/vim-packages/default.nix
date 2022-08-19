@@ -199,4 +199,14 @@ in {
       sha256 = "1mllzgp66ds79anpz1k6gz4dkp2hjhn79iwi8chsap1hrpjc4yp1";
     };
   };
+
+  kmonad-vim = buildVimPluginFrom2Nix {
+    name = "kmonad-vim";
+    src = fetchFromGitHub {
+      owner = "kmonad";
+      repo = "kmonad-vim";
+      rev = "37978445197ab00edeb5b731e9ca90c2b141723f";
+      sha256 = "13p3i0b8azkmhafyv8hc4hav1pmgqg52xzvk2a3gp3ppqqx9bwpc";
+    };
+  };
 }
