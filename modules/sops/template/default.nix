@@ -22,12 +22,12 @@ let
         type = str;
         default = config._module.args.name;
         description = ''
-          Name of the file used in /run/secrets/files
+          Name of the file used in /run/secrets-rendered
         '';
       };
       path = mkOption {
         type = str;
-        default = "/run/secrets/files/${config.name}";
+        default = "/run/secrets-rendered/${config.name}";
       };
       content = mkOption {
         type = str;
