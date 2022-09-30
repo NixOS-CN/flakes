@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, pkgconfig, coreutils, update-nix-fetchgit }:
+{ stdenv, fetchFromGitHub, pkg-config, coreutils, update-nix-fetchgit }:
 let outDir = placeholder "out";
 in stdenv.mkDerivation rec {
   name = "intel-undervolt";
@@ -8,7 +8,7 @@ in stdenv.mkDerivation rec {
     rev = "ea0e74c583fb0ba4bccd896d3e9c7eb83507b749";
     sha256 = "1fjhjqxhcgzawqmknxhmrkq0b7hjfpw6fcigzyw6vg5yf2lws507";
   };
-  nativeBuildInputs = [ pkgconfig ];
+  nativeBuildInputs = [ pkg-config ];
   configureFlags = [
     "--bindir=${outDir}/bin"
     "--sysconfdir=/etc"

@@ -1,5 +1,5 @@
 { stdenv, fetchFromGitHub, wrapGAppsHook, meson, ninja, gobject-introspection
-, glib, pkgconfig, gmock, gtest }:
+, glib, pkg-config, gmock, gtest }:
 stdenv.mkDerivation {
   name = "libanimation";
   src = fetchFromGitHub {
@@ -11,5 +11,5 @@ stdenv.mkDerivation {
   patches = [ ./remove-test.patch ];
   nativeBuildInputs = [ wrapGAppsHook ];
   buildInputs =
-    [ meson ninja gobject-introspection glib pkgconfig gmock gtest ];
+    [ meson ninja gobject-introspection glib pkg-config gmock gtest ];
 }

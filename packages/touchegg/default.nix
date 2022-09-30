@@ -8,7 +8,7 @@
 , stdenv
 , lib
 , cmake
-, pkgconfig
+, pkg-config
 , fetchFromGitHub
 , update-nix-fetchgit }:
 let
@@ -30,7 +30,7 @@ stdenv.mkDerivation {
   '';
 
   buildInputs = with xorg; [
-    pkgconfig
+    pkg-config
     libinput
     cairo
     systemd
