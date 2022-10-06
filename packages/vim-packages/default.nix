@@ -13,7 +13,8 @@ in {
   updateAction = "${update-nix-fetchgit}/bin/update-nix-fetchgit *";
 
   mundo = buildVimPluginFrom2Nix {
-    name = "vim-mundo";
+    pname = "vim-mundo";
+    version = "git";
     src = fetchFromGitHub {
       owner = "simnalamburt";
       repo = "vim-mundo";
@@ -23,7 +24,8 @@ in {
   };
 
   ncm2-yoink = buildVimPluginFrom2Nix {
-    name = "ncm2-yoink";
+    pname = "ncm2-yoink";
+    version = "git";
     src = fetchFromGitHub {
       owner = "svermeulen";
       repo = "ncm2-yoink";
@@ -33,7 +35,8 @@ in {
   };
 
   ncm2-syntax = buildVimPluginFrom2Nix {
-    name = "ncm2-yoink";
+    pname = "ncm2-yoink";
+    version = "git";
     src = fetchFromGitHub {
       owner = "ncm2";
       repo = "ncm2-syntax";
@@ -43,7 +46,8 @@ in {
   };
 
   neovim-gdb = buildVimPluginFrom2Nix {
-    name = "neovim-gdb";
+    pname = "neovim-gdb";
+    version = "git";
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
@@ -57,7 +61,8 @@ in {
   };
 
   vim-smoothie = buildVimPluginFrom2Nix {
-    name = "vim-smoothie";
+    pname = "vim-smoothie";
+    version = "git";
     src = fetchFromGitHub {
       owner = "psliwka";
       repo = "vim-smoothie";
@@ -67,7 +72,8 @@ in {
   };
 
   vim-vala = buildVimPluginFrom2Nix {
-    name = "vim-vala";
+    pname = "vim-vala";
+    version = "git";
     src = fetchFromGitHub {
       owner = "arrufat";
       repo = "vala.vim";
@@ -77,7 +83,8 @@ in {
   };
 
   vim-ingo-library = buildVimPluginFrom2Nix {
-    name = "vim-ingo-library";
+    pname = "vim-ingo-library";
+    version = "git";
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
@@ -87,7 +94,8 @@ in {
   };
 
   context = buildVimPluginFrom2Nix {
-    name = "vim-context";
+    pname = "vim-context";
+    version = "git";
     src = fetchFromGitHub {
       owner = "wellle";
       repo = "context.vim";
@@ -97,7 +105,8 @@ in {
   };
 
   gina = buildVimPluginFrom2Nix {
-    name = "gina.vim";
+    pname = "gina.vim";
+    version = "git";
     src = fetchFromGitHub {
       owner = "lambdalisue";
       repo = "gina.vim";
@@ -107,7 +116,8 @@ in {
   };
 
   codi = buildVimPluginFrom2Nix {
-    name = "codi.vim";
+    pname = "codi.vim";
+    version = "git";
     src = fetchFromGitHub {
       owner = "metakirby5";
       repo = "codi.vim";
@@ -117,7 +127,8 @@ in {
   };
 
   coc-dictionary = buildVimPluginFrom2Nix {
-    name = "coc-dictionary";
+    pname = "coc-dictionary";
+    version = "git";
     src = coc-source;
     preInstall = ''
       cd packages/dictionary
@@ -125,7 +136,8 @@ in {
   };
 
   coc-word = buildVimPluginFrom2Nix {
-    name = "coc-word";
+    pname = "coc-word";
+    version = "git";
     src = coc-source;
     preInstall = ''
       cd packages/word
@@ -133,7 +145,8 @@ in {
   };
 
   coc-syntax = buildVimPluginFrom2Nix {
-    name = "coc-syntax";
+    pname = "coc-syntax";
+    version = "git";
     src = coc-source;
     preInstall = ''
       cd packages/syntax
@@ -141,7 +154,8 @@ in {
   };
 
   nerdtree-syntax-highlight = buildVimPluginFrom2Nix {
-    name = "vim-nerdtree-syntax-highlight";
+    pname = "vim-nerdtree-syntax-highlight";
+    version = "git";
     src = fetchFromGitHub {
       owner = "tiagofumo";
       repo = "vim-nerdtree-syntax-highlight";
@@ -151,7 +165,8 @@ in {
   };
 
   nvim-lsp = buildVimPluginFrom2Nix {
-    name = "nvim-lsp";
+    pname = "nvim-lsp";
+    version = "git";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
@@ -161,7 +176,8 @@ in {
   };
 
   keysound = buildVimPluginFrom2Nix {
-    name = "vim-keysound";
+    pname = "vim-keysound";
+    version = "git";
     src = fetchFromGitHub {
       owner = "skywind3000";
       repo = "vim-keysound";
@@ -171,7 +187,8 @@ in {
   };
 
   vidir = buildVimPluginFrom2Nix {
-    name = "vidir";
+    pname = "vidir";
+    version = "git";
     src = fetchFromGitHub {
       owner = "aca";
       repo = "vidir.nvim";
@@ -181,7 +198,8 @@ in {
   };
 
   vibusen = buildVimPluginFrom2Nix {
-    name = "vibusen.vim";
+    pname = "vibusen.vim";
+    version = "git";
     src = fetchFromGitHub {
       owner = "lsrdg";
       repo = "vibusen.vim";
@@ -191,7 +209,8 @@ in {
   };
 
   soong = buildVimPluginFrom2Nix {
-    name = "soong.vim";
+    pname = "soong.vim";
+    version = "git";
     src = fetchFromGitHub {
       owner = "cherrry";
       repo = "soong.vim";
@@ -201,7 +220,8 @@ in {
   };
 
   kmonad-vim = buildVimPluginFrom2Nix {
-    name = "kmonad-vim";
+    pname = "kmonad-vim";
+    version = "git";
     src = fetchFromGitHub {
       owner = "kmonad";
       repo = "kmonad-vim";
