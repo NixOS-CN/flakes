@@ -47,12 +47,12 @@ in {
 
   neovim-gdb = buildVimPluginFrom2Nix {
     pname = "neovim-gdb";
-    version = "unstable-2022-07-26";
+    version = "unstable-2022-10-24";
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "4408d2c10618636101945e9cd9ef9d68fc335e19";
-      sha256 = "1i57n41z8qpn5a626spkvn08jnbnhygia7hw2d0bvlcy56xx5wv4";
+      rev = "8b0a2e4d072c1451be80b1fd523942553e1e5e50";
+      sha256 = "17hg58f25sxqidlfkqlijs2k229fpmdf8bai5d2f086nv14s1m6q";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
@@ -166,12 +166,12 @@ in {
 
   nvim-lsp = buildVimPluginFrom2Nix {
     pname = "nvim-lsp";
-    version = "unstable-2022-10-23";
+    version = "unstable-2022-10-24";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "0b3e5ce95dd70cbeb9dcf0f690f5f7210e004198";
-      sha256 = "01aikqxlmzm7rkvlmiqkf8d531fy205gp6cgm1g63fa4qksv30gm";
+      rev = "d8d48b7a8ce12605378fba6391348b99e8a7a4c1";
+      sha256 = "09hxcx6k9sfr2ckqyg888krvv7jqfi699xr7w84p6bii8j84bapq";
     };
   };
 
