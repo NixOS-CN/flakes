@@ -5,8 +5,8 @@ let
   coc-source = fetchFromGitHub {
     owner = "neoclide";
     repo = "coc-sources";
-    rev = "70564820ac1718b7f85f6cd9e67269500bd41211";
-    sha256 = "1l7lhys5vmb0ixnxrhis10yh68icq4a13qmpx0yy14kal9aiqg20";
+    rev = "1eb5f24e0d42ed8917aea7289e5aa2004d5242fe";
+    sha256 = "12fz2vlaazazp6fhpgmyy59z128irgpb33iyx1kag88z1gxvf1if";
   };
 
 in {
@@ -47,12 +47,12 @@ in {
 
   neovim-gdb = buildVimPluginFrom2Nix {
     pname = "neovim-gdb";
-    version = "unstable-2022-10-27";
+    version = "unstable-2022-10-29";
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "127087ec368212d4d763aeb58fdf585abc6a8a0e";
-      sha256 = "15f1crn83yf5amdv0m9cc54znq1w3m2x5nywh70bsz753a37a4ys";
+      rev = "044fc1ef23f485b4fde75b838f0fa27490377854";
+      sha256 = "0qag2blr9zc3dl1gw1606gqrc1c03k0c5vg0dflkg31vpdgiqvv4";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
