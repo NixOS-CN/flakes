@@ -30,7 +30,7 @@ let
         default = "/run/secrets-rendered/${config.name}";
       };
       content = mkOption {
-        type = str;
+        type = lines;
         default = "";
         description = ''
           Content of the file
