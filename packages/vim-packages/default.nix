@@ -5,8 +5,8 @@ let
   coc-source = fetchFromGitHub {
     owner = "neoclide";
     repo = "coc-sources";
-    rev = "1eb5f24e0d42ed8917aea7289e5aa2004d5242fe";
-    sha256 = "12fz2vlaazazp6fhpgmyy59z128irgpb33iyx1kag88z1gxvf1if";
+    rev = "85cbf93471ea97ee83a20472406d2a55e3a959b5";
+    sha256 = "06schsw7x0a0gd8ndj076yi2ki0zpkipxz26cppp1d8zdddzd7mx";
   };
 
 in {
