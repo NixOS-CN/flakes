@@ -84,12 +84,12 @@ in {
 
   vim-ingo-library = buildVimPluginFrom2Nix {
     pname = "vim-ingo-library";
-    version = "unstable-2022-12-05";
+    version = "unstable-2022-12-30";
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "461680fd4baf2ae519bf27fd45fc627c32442bf7";
-      sha256 = "0kf04rhhv1qm002c9i2f0rfimp5c5h9hh0v47cn5sbzhvfij6awk";
+      rev = "097b1c729ee0f334a40eddfbd84d77161287f2f1";
+      sha256 = "07pph8jgv8hx0mbv57k66ps2w6lcmxwwwwdrin7xf0228myxh9fh";
     };
   };
 
@@ -166,12 +166,12 @@ in {
 
   nvim-lsp = buildVimPluginFrom2Nix {
     pname = "nvim-lsp";
-    version = "unstable-2022-12-29";
+    version = "unstable-2022-12-31";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "7d0ce54a4cf6e844d87e49d1576c0fffb6d27a6e";
-      sha256 = "0kwhan5qich11wk72j4p4gpybw7yqh45x5frszp3w6xp7jfj7bar";
+      rev = "6b43ce561d97412cc512b569db6938e44529293e";
+      sha256 = "04rv8pbn35lps03iqvfik10fb67f5lsrb2vv0mqwlxvzkm65m151";
     };
   };
 
@@ -210,12 +210,12 @@ in {
 
   soong = buildVimPluginFrom2Nix {
     pname = "soong.vim";
-    version = "unstable-2021-04-30";
+    version = "unstable-2023-01-03";
     src = fetchFromGitHub {
       owner = "cherrry";
       repo = "soong.vim";
-      rev = "58f8a2b2e066f76f932b9683883689797b0d7274";
-      sha256 = "1mllzgp66ds79anpz1k6gz4dkp2hjhn79iwi8chsap1hrpjc4yp1";
+      rev = "02dc1dd7c56ded823c07d0b6c811e4f2d5ca200a";
+      sha256 = "1cqnbh45hhggny3zm7shjiy0nf54hgz2qlbz9bi27qpbks9d5r9r";
     };
   };
 
