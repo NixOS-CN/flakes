@@ -5,8 +5,8 @@ let
   coc-source = fetchFromGitHub {
     owner = "neoclide";
     repo = "coc-sources";
-    rev = "85cbf93471ea97ee83a20472406d2a55e3a959b5";
-    sha256 = "06schsw7x0a0gd8ndj076yi2ki0zpkipxz26cppp1d8zdddzd7mx";
+    rev = "a6e5e3bc1f1ae6a52c721f8e5b4e3fd7f59b46c1";
+    sha256 = "18pwama01ka6nf16amckaxba3sy11y2j5ws6fk7692wmvg2id4bw";
   };
 
 in {
@@ -166,12 +166,12 @@ in {
 
   nvim-lsp = buildVimPluginFrom2Nix {
     pname = "nvim-lsp";
-    version = "unstable-2023-01-21";
+    version = "unstable-2023-01-22";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "0eecf453d33248e9d571ad26559f35175c37502d";
-      sha256 = "0ninvnv7y69sns08blmiw4khhcg2yjwlri4xj492qx1rfygy9xsl";
+      rev = "85cd2ecacd8805614efe3fb3a5146ac7d0f88a17";
+      sha256 = "0fhfqf4rag58q64wfrlfzyw87n3zv24gnwr9inn3i63b27r57w83";
     };
   };
 
