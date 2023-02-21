@@ -4,8 +4,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "Fausto-Korpsvart";
     repo = "Gruvbox-GTK-Theme";
-    rev = "13fe1d7bfb43557642a37da3498cd35ba285c593";
-    sha256 = "1gg0g3hi1k188q2l57rlk0vbyzp8ss7cvksy3v61z9l2d3xh8qyy";
+    rev = "44e81d8226579a24a791f3acf43b97de815bc4b1";
+    sha256 = "0ji698r0p2snwdim59qrly4xzh6c5lx9crgznwrvc4yrnb9cii65";
   };
 
   dontBuild = true;
