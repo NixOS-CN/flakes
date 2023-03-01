@@ -117,12 +117,12 @@ in {
 
   codi = buildVimPluginFrom2Nix {
     pname = "codi.vim";
-    version = "unstable-2023-01-24";
+    version = "unstable-2023-03-01";
     src = fetchFromGitHub {
       owner = "metakirby5";
       repo = "codi.vim";
-      rev = "ab8c5faa867424c79a7d5d3a7f55d3a2528ee9b9";
-      sha256 = "0d3rpj31wd5xzwcrnv7rwm54g81s3i4hxs7lcwph8k1j7pb8i1nl";
+      rev = "83b9859aaf8066d95892e01eb9c01571a4b325dd";
+      sha256 = "11nab2bvna9q8h87ikjj44mzc4irf80xa2hh3r2lmq65z6p1kpdw";
     };
   };
 
@@ -166,12 +166,12 @@ in {
 
   nvim-lsp = buildVimPluginFrom2Nix {
     pname = "nvim-lsp";
-    version = "unstable-2023-02-24";
+    version = "unstable-2023-03-01";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "62856b20751b748841b0f3ec5a10b1e2f6a6dbc9";
-      sha256 = "0daa6q1q2sscgjqcgif8qigqmiv31s3a4bwbrpradfd3aac44gs0";
+      rev = "3b08f2edc461314b9051edf26348f8af3fe33e63";
+      sha256 = "1khp1l2k3niyx9i17ckw5fhl2157mlg7lh4ww30mv1q1fngqfrk6";
     };
   };
 
