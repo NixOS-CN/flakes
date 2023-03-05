@@ -43,7 +43,7 @@ rustPlatform.buildRustPackage rec {
     description = "A tool for controlling multi-layer file systems and containers.";
     homepage = "https://www.rustup.rs/";
     license = licenses.mit;
-    platforms = platforms.unix;
-    maintainers = with maintainers; [ yisuidenghua ];
+    # platforms = platforms.unix;
+    # maintainers = with maintainers; [ yisuidenghua ];
   };
 }
