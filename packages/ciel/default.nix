@@ -1,6 +1,6 @@
 { lib
 , fetchFromGitHub
-, rustPlatform
+, pkgs
 , systemd
 , dbus
 , openssl
@@ -10,6 +10,10 @@
 , libgit2
 , zlib
 }:
+
+let
+  rustPlatform = pkgs.makeRustPlatform { inherit (pkgs.fenix.minimal) cargo rustc; };
+in
 
 rustPlatform.buildRustPackage rec {
   pname = "ciel";
