@@ -177,12 +177,12 @@ in {
 
   keysound = buildVimPluginFrom2Nix {
     pname = "vim-keysound";
-    version = "unstable-2019-01-15";
+    version = "unstable-2023-03-11";
     src = fetchFromGitHub {
       owner = "skywind3000";
       repo = "vim-keysound";
-      rev = "88a60a3c3537b6342ec221415e2348ae03f8b71d";
-      sha256 = "0yjyji5vrha7i15yvs7qf9dmyrilaqkypcmf1a3vhvpcidmb1ha0";
+      rev = "6c662549b477f79347c32fb3683432137c391a96";
+      sha256 = "121bm3l63z82ilsvn1ydp3hk1430wyi8zlhzzszd37gadblnws50";
     };
   };
 
