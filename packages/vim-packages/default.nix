@@ -84,12 +84,12 @@ in {
 
   vim-ingo-library = buildVimPluginFrom2Nix {
     pname = "vim-ingo-library";
-    version = "unstable-2022-12-30";
+    version = "unstable-2023-03-16";
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "097b1c729ee0f334a40eddfbd84d77161287f2f1";
-      sha256 = "07pph8jgv8hx0mbv57k66ps2w6lcmxwwwwdrin7xf0228myxh9fh";
+      rev = "cb7c6728608e3c727e0620582f0b0becd8ce28f3";
+      sha256 = "1p257qykk2rvllqf7kvw4rpys8mpjjdw3yv89pc52744hrg9wngs";
     };
   };
 
@@ -166,12 +166,12 @@ in {
 
   nvim-lsp = buildVimPluginFrom2Nix {
     pname = "nvim-lsp";
-    version = "unstable-2023-03-15";
+    version = "unstable-2023-03-16";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "63f4c0082f007d2356df4bc335f55e6d414da89c";
-      sha256 = "0mw3ld7nwl38chfa5f1p2bi3vknrl0srxf7dbx0pqymj1m38pwhg";
+      rev = "0cbf919e49c664a0b189a6b08a7da03996b4c3eb";
+      sha256 = "0842alyd33ql018gdbwwy30q1xnw494p5c1qq57zcbhyq63lnmxh";
     };
   };
 
