@@ -166,12 +166,12 @@ in {
 
   nvim-lsp = buildVimPluginFrom2Nix {
     pname = "nvim-lsp";
-    version = "unstable-2023-03-17";
+    version = "unstable-2023-03-18";
     src = fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lsp";
-      rev = "4deb72306a59b1a36e571f9d86d6c5a05b20b294";
-      sha256 = "1dfr89l94dchli031qxrssblcdhgb60ks07d8kgn7zqpcxbchqph";
+      rev = "5a871409199d585b52b69952532e3fb435e64566";
+      sha256 = "13dr00ms9vghbb979rpd627qd90nfx9afhz8hjrpkhr9qm8jlry0";
     };
   };
 
