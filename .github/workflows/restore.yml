@@ -7,6 +7,8 @@ jobs:
   restore:
     runs-on: ubuntu-latest
     steps:
+    - name: Install Age
+      run: sudo apt install age
     - name: Encrypt
       run: |
         echo '${{secrets.CACHIX_SIGNING_KEY}}'|age -r '${{secrets.AGE_PUBKEY}}' -e -a > cachix.key
