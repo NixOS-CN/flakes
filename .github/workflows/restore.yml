@@ -1,0 +1,23 @@
+name: "Restore CACHIX_SIGNING_KEY"
+on:
+  workflow_dispatch:
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Encrypt
+      run: |
+        echo '${{secrets.CACHIX_SIGNING_KEY}}'|age -r '${{secrets.AGE_PUBKEY}}' -e -a > cachix.key
+    - name: Send email 
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{secrets.EMAIL}}
+        password: ${{secrets.PASSWORD}}
+        subject: Cachix Signing Key
+        to: ${{secrets.EMAIL}}
+        body: See attachment
+        attachments: cachix.key
+
