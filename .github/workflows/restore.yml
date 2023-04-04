@@ -1,6 +1,7 @@
 name: "Restore CACHIX_SIGNING_KEY"
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   restore:
