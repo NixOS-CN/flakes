@@ -84,12 +84,12 @@ in {
 
   vim-ingo-library = buildVimPluginFrom2Nix {
     pname = "vim-ingo-library";
-    version = "unstable-2023-03-16";
+    version = "unstable-2023-04-18";
     src = fetchFromGitHub {
       owner = "inkarkat";
       repo = "vim-ingo-library";
-      rev = "cb7c6728608e3c727e0620582f0b0becd8ce28f3";
-      sha256 = "1p257qykk2rvllqf7kvw4rpys8mpjjdw3yv89pc52744hrg9wngs";
+      rev = "919a217accb66ad085060eb37be329cbf74f084e";
+      sha256 = "000niwdvi7df3zb99hgxv1j54j9whhihijg1pz8wnqqdhi1lqb77";
     };
   };
 
