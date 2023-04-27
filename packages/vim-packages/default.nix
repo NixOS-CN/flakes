@@ -47,12 +47,12 @@ in {
 
   neovim-gdb = buildVimPluginFrom2Nix {
     pname = "neovim-gdb";
-    version = "unstable-2023-04-24";
+    version = "unstable-2023-04-26";
     src = fetchFromGitHub {
       owner = "sakhnik";
       repo = "nvim-gdb";
-      rev = "db94489084881ac5788ef88d6fc07175f75cb401";
-      sha256 = "14nsqyl3basbmd71d4jy8a8l2x0vmj5vcjyy2dzdqv3md04dz47v";
+      rev = "d7504a52e3f5f1b6d7f62a006646681bde65a310";
+      sha256 = "0r8fm8pq44zcd85s40mbmip4fmblfm9115xf6zwlvrpkhv136zjd";
     };
     buildInputs = [ python3 ];
     postUnpack = ''
