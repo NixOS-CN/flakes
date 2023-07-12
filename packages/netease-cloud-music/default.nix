@@ -1,70 +1,156 @@
-{ alsa-lib, autoPatchelfHook, dpkg, e2fsprogs, fetchurl, fontconfig, freetype
-, harfbuzz, lib, libdrm, libGL, libgpgerror, libusb, makeWrapper
-, p11-kit, stdenv, xorg, zlib }:
-let
-  inherit ((builtins.getFlake "github:NixOS/nixpkgs/23485f23ff8536592b5178a5d244f84da770bc87").legacyPackages.${stdenv.system})
-  glib gdk-pixbuf qt5 pango;
-in 
+{ lib
+, stdenv
+, fetchurl
+, dpkg
+, autoPatchelfHook
+, makeWrapper
+# , qt5
+, xorg
+, libdrm
+, alsa-lib
+, taglib
+, vlc
+, krb5
+, gtk2
+, gtk3
+, tcp_wrappers
+, e2fsprogs
+, gnutls
+, avahi
+, sqlite
+, libogg
+, libvorbis
+, libsndfile
+, libasyncns
+, dbus-glib
+, cups
+, nspr
+, gnome2
+, nss
+, icu60
+, libinput
+, mtdev
+, libpulseaudio
+  # , double-conversion
+  # , libjpeg_original
+  # , nettle
+  # , flac
+  # , eudev
+}:
 stdenv.mkDerivation rec {
   pname = "netease-cloud-music";
   version = "1.2.1";
   src = fetchurl {
-    url =
-      "http://d1.music.126.net/dmusic/netease-cloud-music_${version}_amd64_ubuntu_20190428.deb";
-    sha256 = "1fzc5xb3h17jcdg8w8xliqx2372g0wrfkcj8kk3wihp688lg1s8y";
-    curlOpts = "-A 'Mozilla/5.0'";
+    url = "https://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb";
+    sha256 = "sha256-HunwKELmwsjHnEiy6TIHT5whOo60I45eY/IEOFYv7Ls=";
+    curlOpts = "-AMozilla/5.0";
   };
-  unpackCmd = "${dpkg}/bin/dpkg -x $src .";
-  sourceRoot = ".";
 
-  nativeBuildInputs = [ qt5.wrapQtAppsHook makeWrapper autoPatchelfHook ];
+  nativeBuildInputs = [
+    dpkg
+    autoPatchelfHook
+    makeWrapper
+  ];
+  # some libraries' versions don't match, comment them
   buildInputs = [
-    alsa-lib
-    e2fsprogs
-    fontconfig.lib
-    freetype
-    gdk-pixbuf
-    glib
-    harfbuzz
-    libdrm
-    libGL
-    libgpgerror
-    libusb
-    p11-kit
-    pango
-    qt5.qtbase
-    qt5.qtdeclarative
-    qt5.qtwebchannel
     stdenv.cc.cc.lib
-    xorg.libX11
-    zlib
+    # qt5.qtbase
+    # qt5.qtdeclarative
+    # qt5.qtwebchannel
+    # qt5.qtx11extras
+    # xorg.libXtst
+    xorg.libXScrnSaver
+    xorg.xcbutilkeysyms
+    xorg.xcbutilimage
+    xorg.xcbutilwm
+    xorg.xcbutilrenderutil
+    libdrm
+    alsa-lib
+    taglib
+    vlc
+    krb5
+    gtk2
+    gtk3
+    tcp_wrappers
+    e2fsprogs
+    gnutls
+    avahi
+    sqlite
+    libogg
+    libvorbis
+    libsndfile
+    libasyncns
+    dbus-glib
+    cups
+    nspr
+    gnome2.GConf
+    nss
+    icu60
+    libinput
+    mtdev
+    libpulseaudio
+    # double-conversion
+    # libjpeg_original
+    # nettle
+    # flac
+    # eudev
   ];
 
+  unpackPhase = ''
+    dpkg -x "$src" .
+  '';
+  # https://aur.archlinux.org/cgit/aur.git/tree/exclude.list?h=netease-cloud-music
+  # don't use NixOS's qt5
+  # --set QT_PLUGIN_PATH "${qt5.qtbase}/${qt5.qtbase.qtPluginPrefix}" \
+  # --set QT_QPA_PLATFORM_PLUGIN_PATH "${qt5.qtbase}/${qt5.qtbase.qtPluginPrefix}/platforms" \
   installPhase = ''
-    mkdir -p $out/share
-    cp -r usr/share/* $out/share
-
-    mkdir -p $out/lib/netease-cloud-music
-    cp -r opt/netease/netease-cloud-music/libs $out/lib/netease-cloud-music
+    install -D opt/netease/netease-cloud-music/netease-cloud-music -t $out/bin
+    install -Dm644 \
+      opt/netease/netease-cloud-music/libs/libdouble-conversion.so.1 \
+      opt/netease/netease-cloud-music/libs/libFLAC.so.8 \
+      opt/netease/netease-cloud-music/libs/libjpeg.so.8 \
+      opt/netease/netease-cloud-music/libs/libpulsecommon-11.1.so \
+      opt/netease/netease-cloud-music/libs/libqcef.so.1.1.4 \
+      opt/netease/netease-cloud-music/libs/libudev.so.1 \
+      opt/netease/netease-cloud-music/libs/libXtst.so.6 \
+      opt/netease/netease-cloud-music/libs/libQt5Core.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5Gui.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5XcbQpa.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5Network.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5Xml.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5Qml.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5Svg.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5EglFSDeviceIntegration.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5X11Extras.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5DBus.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5WebChannel.so.5 \
+      opt/netease/netease-cloud-music/libs/libQt5Widgets.so.5 \
+      -t $out/lib/netease-cloud-music
     cp -r opt/netease/netease-cloud-music/plugins $out/lib/netease-cloud-music
-
-    mkdir -p $out/bin
-    cp opt/netease/netease-cloud-music/netease-cloud-music $out/bin/netease-cloud-music
+    cp -r opt/netease/netease-cloud-music/libs/qcef $out/lib/netease-cloud-music
+    cp -r usr $out
   '';
 
+  preFixup = ''
+    rm -r *
+    ln -s libqcef.so.1.1.4 $out/lib/netease-cloud-music/libqcef.so.1
+  '';
   postFixup = ''
     wrapProgram $out/bin/netease-cloud-music \
-      --set QT_PLUGIN_PATH  "$out/lib/netease-cloud-music/plugins" \
+      --set QT_PLUGIN_PATH "$out/lib/netease-cloud-music/plugins" \
       --set QT_QPA_PLATFORM_PLUGIN_PATH "$out/lib/netease-cloud-music/plugins/platforms" \
-      --set QCEF_INSTALL_PATH "$out/lib/netease-cloud-music/libs/qcef" \
-      --set QT_XKB_CONFIG_ROOT "${xorg.xkeyboardconfig}/share/X11/xkb"
+      --set QCEF_INSTALL_PATH "$out/lib/netease-cloud-music/qcef" \
+      --set QT_XKB_CONFIG_ROOT "${xorg.xkeyboardconfig}/share/X11/xkb" \
+      --set XDG_SESSION_TYPE x11 \
+      --set QT_QPA_PLATFORM xcb \
+      --unset WAYLAND_DISPLAY
   '';
 
-  meta = {
+  meta = with lib; {
     description = "Client for Netease Cloud Music service";
     homepage = "https://music.163.com";
     platforms = [ "x86_64-linux" ];
-    maintainers = [ lib.maintainers.mlatus ];
-    license = lib.licenses.unfree;
+    maintainers = with maintainers; [ mlatus Freed-Wu ];
+    license = licenses.unfree;
   };
 }
