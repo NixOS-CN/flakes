@@ -24,4 +24,9 @@
     owner = "EHfive";
     repo = "flakes";
   };
+  Guanran928 = {
+    type = "github";
+    owner = "Guanran928";
+    repo = "nur-packages";
+  };
 }
