@@ -17,7 +17,7 @@ jobs:
         # Nix Flakes doesn't work on shallow clones
         fetch-depth: 0
     - name: Install nixFlake
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@V27
       with:
         install_url: https://github.com/numtide/nix-unstable-installer/releases/latest/download/install
         extra_nix_config: |
