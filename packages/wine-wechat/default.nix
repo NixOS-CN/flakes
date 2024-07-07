@@ -1,5 +1,4 @@
-{ stdenv, lib, fetchpatch, fetchurl, gnutar, zstd, python3, makeWrapper, srcOnly
-, substituteAll, runCommand, bubblewrap, coreutils, nix, scopedMount ? false
+{ stdenv, lib, fetchpatch, fetchurl, gnutar, zstd, python3, makeWrapper, substituteAll, runCommand, bubblewrap, coreutils, nix, scopedMount ? false
 , extraROMountPoints ? { }, extraMountPoints ? { }
 , fakeHome ? "$HOME/.local/fakefs/wechat" }:
 let

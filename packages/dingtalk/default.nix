@@ -31,7 +31,7 @@
 , util-linux
 , xorg
 , ...
-} @ args:
+}:
 
 ################################################################################
 # Mostly based on dingtalk-bin package from AUR:

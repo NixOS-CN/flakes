@@ -1,4 +1,4 @@
-{ pkgs, lib, applyPatches, stdenv, runCommand, makeWrapper, fetchFromGitHub
+{ pkgs, lib, applyPatches, runCommand, makeWrapper, fetchFromGitHub
 , nodejs, hostInLocalNet ? true, infiniteAnimation ? true }:
 let
   source = applyPatches {

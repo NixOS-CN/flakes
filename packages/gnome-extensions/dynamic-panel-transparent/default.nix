@@ -1,4 +1,4 @@
-{ stdenv, fetchgit, jq, update-nix-fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 let uuid = "dynamic-panel-transparency@rockon999.github.io";
 in stdenv.mkDerivation {
   name = "dynamic-panel-transparent";
