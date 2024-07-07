@@ -5,10 +5,49 @@
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, flake-utils }:
-    with flake-utils.lib;
-    with nixpkgs.lib;
-    with builtins;
     let
+      inherit (builtins) readDir;
+      inherit (flake-utils.lib) 
+        eachDefaultSystem
+        flattenTree
+      ;
+      inherit (nixpkgs.lib) 
+        any 
+        attrByPath 
+        attrNames
+        attrValues 
+        collect 
+        concatMapStringsSep 
+        elem 
+        filter 
+        filterAttrs 
+        filterAttrsRecursive 
+        flatten 
+        foldl 
+        getFlake 
+        hasAttrByPath 
+        hasSuffix 
+        importJSON 
+        isAttrs 
+        isDerivation 
+        length 
+        makeScope 
+        mapAttrs 
+        mapAttrs' 
+        mapAttrsToList 
+        mkApp 
+        nameValuePair 
+        pathExists 
+        recurseIntoAttrs 
+        recursiveUpdate 
+        removePrefix 
+        removeSuffix 
+        setAttrByPath 
+        splitString 
+        toList 
+        zipAttrsWith 
+      ;
+
       defaultSystem = "x86_64-linux";
 
       listFiles = dir: map (n: dir + "/${n}") (attrNames (readDir dir));
