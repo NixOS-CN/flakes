@@ -10,6 +10,7 @@
       inherit (flake-utils.lib) 
         eachDefaultSystem
         flattenTree
+        mkApp 
       ;
       inherit (nixpkgs.lib) 
         any 
@@ -35,7 +36,6 @@
         mapAttrs 
         mapAttrs' 
         mapAttrsToList 
-        mkApp 
         nameValuePair 
         pathExists 
         recurseIntoAttrs 
