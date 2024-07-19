@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, substituteAll, gtk3, wrapGAppsHook, python3, bluez
+{ stdenv, fetchFromGitHub, gtk3, wrapGAppsHook, python3, bluez
 , usbutils, gobject-introspection, gdk-pixbuf }:
 let pythonInUse = python3.withPackages (p: with p; [ pygobject3 ]);
 in stdenv.mkDerivation rec {

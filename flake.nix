@@ -5,13 +5,50 @@
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, flake-utils }:
-    with flake-utils.lib;
-    with nixpkgs.lib;
-    with builtins;
     let
-      defaultSystem = "x86_64-linux";
+      inherit (builtins) readDir;
+      inherit (flake-utils.lib) 
+        eachDefaultSystem
+        flattenTree
+        mkApp 
+      ;
+      inherit (nixpkgs.lib) 
+        any 
+        attrByPath 
+        attrNames
+        attrValues 
+        collect 
+        concatMapStringsSep 
+        elem 
+        filter 
+        filterAttrs 
+        filterAttrsRecursive 
+        flatten 
+        foldl 
+        getFlake 
+        hasAttrByPath 
+        hasSuffix 
+        importJSON 
+        isAttrs 
+        isDerivation 
+        length 
+        makeScope 
+        mapAttrs 
+        mapAttrs' 
+        mapAttrsToList 
+        nameValuePair 
+        pathExists 
+        recurseIntoAttrs 
+        recursiveUpdate 
+        removePrefix 
+        removeSuffix 
+        setAttrByPath 
+        splitString 
+        toList 
+        zipAttrsWith 
+      ;
 
-      listFiles = dir: map (n: dir + "/${n}") (attrNames (readDir dir));
+      defaultSystem = "x86_64-linux";
       listNixFilesRecursive = dir:
         flatten (mapAttrsToList (name: type:
           let path = dir + "/${name}";
@@ -89,7 +126,7 @@
       mapRecurseIntoAttrs = mapRecurseIntoAttrs' null;
       mergeAttrsUniquely = s:
         let
-          nameCount = zipAttrsWith (name: values: length values) (attrValues s);
+          nameCount = zipAttrsWith (_name: length) (attrValues s);
         in foldl (prev: name:
           prev // (mapAttrs' (n: v:
             if nameCount.${n} > 1 then
@@ -97,19 +134,19 @@
             else
               nameValuePair n v) s.${name})) { } (attrNames s);
       isUnfree = licenses: any (l: !l.free or true) (toList licenses);
-      hasUnfreeLicense = attrs: attrs ? meta.license && isUnfree (attrs.meta.license);
+      hasUnfreeLicense = attrs: attrs ? meta.license && isUnfree attrs.meta.license;
 
     in eachDefaultSystem (system:
       let
-        pkgs = (import nixpkgs {
+        pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-        });
+        };
         intree-packages =
           filterBySystem system (mapRecurseIntoAttrs (makePackageScope pkgs));
         outtree-packages = # filterBySystem system
-          (mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
-            (_: output: attrByPath [ "packages" system ] { } output))));
+          mapRecurseIntoAttrs (mergeAttrsUniquely (extractFromRegistries
+            (_: output: attrByPath [ "packages" system ] { } output)));
       in rec {
         legacyPackages = intree-packages // { re-export = outtree-packages; };
         apps = {
@@ -201,14 +238,14 @@
         checks = flattenTree intree-packages;
         hydraJobs = filterAttrs (_: v: !(hasUnfreeLicense v)) checks;
       }) // {
-        overlay = final: prev: {
+        overlay = final: _prev: {
           nixos-cn = mapRecurseIntoAttrs (makePackageScope final);
         };
         nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
           imports = listNixFilesRecursive ./modules;
         };
-        nixosModules.nixos-cn-registries = { ... }: {
+        nixosModules.nixos-cn-registries = _: {
           nix.registry = toNixOSCNRegistries (import ./registries.nix);
         };
       };

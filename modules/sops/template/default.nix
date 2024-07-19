@@ -3,7 +3,7 @@ with lib;
 with lib.types;
 with builtins;
 let
-  users = config.users.users;
+  inherit (config.users) users;
   substitute = pkgs.writers.writePython3 "substitute" { }
     (replaceStrings [ "@subst@" ] [ "${subst-pairs}" ] (readFile ./subs.py));
   subst-pairs = pkgs.writeText "pairs" (concatMapStringsSep "\n" (name:

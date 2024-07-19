@@ -1,4 +1,4 @@
-{ stdenv, fetchgit, jq, update-nix-fetchgit }:
+{ stdenv, fetchgit, update-nix-fetchgit }:
 let uuid = "tray-icons@zhangkaizhao.com";
 in stdenv.mkDerivation {
   name = "dynamic-panel-transparent";

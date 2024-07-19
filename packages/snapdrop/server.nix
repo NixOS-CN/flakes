@@ -12,7 +12,7 @@ let
   };
 in
 import ./node-packages.nix {
-  inherit (pkgs) fetchurl fetchgit;
+  inherit (pkgs) fetchurl;
   inherit nodeEnv;
   inherit source;
 }
