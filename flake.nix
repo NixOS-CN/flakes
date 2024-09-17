@@ -201,9 +201,7 @@
         checks = flattenTree intree-packages;
         hydraJobs = filterAttrs (_: v: !(hasUnfreeLicense v)) checks;
       }) // {
-        overlay = final: prev: {
-          nixos-cn = mapRecurseIntoAttrs (makePackageScope final);
-        };
+        overlay = final: prev: import ./. final prev;
         nixosModules.nixos-cn = { ... }: {
           nixpkgs.overlays = [ self.overlay ];
           imports = listNixFilesRecursive ./modules;
